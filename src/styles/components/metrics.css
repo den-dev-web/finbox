@@ -1,0 +1,108 @@
+.c-metric__indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-primary);
+}
+
+.c-metric--income .c-metric__indicator {
+  background: var(--color-success);
+}
+
+.c-metric--expense .c-metric__indicator {
+  background: var(--color-danger);
+}
+
+.c-metric--balance .c-metric__indicator {
+  background: var(--color-primary);
+}
+
+.c-metric--accounts .c-metric__indicator {
+  background: #f5b941;
+}
+
+.c-metric__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.c-metric__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(24, 162, 115, 0.12);
+  color: var(--color-success);
+  border: 1px solid rgba(24, 162, 115, 0.2);
+}
+
+.c-metric__delta[data-delta-state="negative"] {
+  background: rgba(217, 75, 75, 0.12);
+  color: var(--color-danger);
+  border-color: rgba(217, 75, 75, 0.24);
+}
+
+.c-metric__value {
+  margin: 0;
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 700;
+}
+
+.c-metric__summary {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(27, 30, 40, 0.62);
+  line-height: 1.45;
+}
+
+html[data-theme="dark"] .c-metric__summary {
+  color: rgba(231, 235, 245, 0.62);
+}
+
+html[data-theme="dark"] .c-metric__delta {
+  background: rgba(60, 194, 138, 0.16);
+  border-color: rgba(60, 194, 138, 0.28);
+}
+
+html[data-theme="dark"] .c-metric__delta[data-delta-state="negative"] {
+  background: rgba(255, 107, 107, 0.16);
+  border-color: rgba(255, 107, 107, 0.3);
+}
+
+.c-metric__retry {
+  margin-top: var(--space-sm);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: inherit;
+  border-radius: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.c-metric__retry:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 560px) {
+  .c-metric__title {
+    gap: 0.35rem;
+  }
+
+  .c-metric__delta {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .c-metric__value {
+    font-size: clamp(1.3rem, 5vw, 1.8rem);
+  }
+
+  .c-metric__summary {
+    font-size: 0.78rem;
+  }
+}

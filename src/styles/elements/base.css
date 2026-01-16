@@ -1,0 +1,14 @@
+body {
+  font-family: "FinBox Sans", system-ui, -apple-system, sans-serif;
+  line-height: var(--line-height);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  transition: background-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out);
+}
+
+body.is-scroll-locked {
+  overflow: hidden;
+}

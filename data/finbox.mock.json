@@ -1,0 +1,220 @@
+{
+  "periods": {
+    "day": {
+      "metrics": {
+        "income": 12640,
+        "expense": 8420,
+        "balance": 4220,
+        "accounts": 12,
+        "deltas": {
+          "income": 4.2,
+          "expense": -2.1,
+          "balance": 3.6,
+          "accounts": 1.4
+        }
+      },
+      "charts": {
+        "income": {
+          "labels": ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"],
+          "values": [1200, 1800, 2100, 1600, 2400, 3540]
+        },
+        "expense": {
+          "labels": ["08:00", "10:00", "12:00", "14:00", "16:00", "18:00"],
+          "values": [400, 980, 1320, 1450, 1890, 2380]
+        },
+        "spending": {
+          "labels": ["Food", "Bills", "Travel", "Shopping", "Other"],
+          "values": [28, 22, 18, 20, 12]
+        }
+      },
+      "transactions": [
+        {
+          "date": "2026-04-18",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -28.4
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Salary",
+          "description": "Daily bonus",
+          "amount": 320
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Shopping",
+          "description": "Office supplies",
+          "amount": -74.2
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Travel",
+          "description": "Taxi",
+          "amount": -16.5
+        }
+      ]
+    },
+    "week": {
+      "metrics": {
+        "income": 62400,
+        "expense": 38150,
+        "balance": 24250,
+        "accounts": 18,
+        "deltas": {
+          "income": 6.8,
+          "expense": 1.9,
+          "balance": 7.4,
+          "accounts": 2.1
+        }
+      },
+      "charts": {
+        "income": {
+          "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "values": [8200, 9100, 7600, 9800, 10400, 8900, 13400]
+        },
+        "expense": {
+          "labels": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "values": [4200, 5100, 4800, 5200, 6100, 5400, 7350]
+        },
+        "spending": {
+          "labels": ["Food", "Bills", "Travel", "Shopping", "Other"],
+          "values": [30, 18, 16, 24, 12]
+        }
+      },
+      "transactions": [
+        {
+          "date": "2026-04-17",
+          "category": "Bills",
+          "description": "Internet",
+          "amount": -48
+        },
+        {
+          "date": "2026-04-16",
+          "category": "Salary",
+          "description": "Weekly payout",
+          "amount": 2180
+        },
+        {
+          "date": "2026-04-15",
+          "category": "Food",
+          "description": "Groceries",
+          "amount": -132.5
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Shopping",
+          "description": "Sneakers",
+          "amount": -164
+        }
+      ]
+    },
+    "month": {
+      "metrics": {
+        "income": 241800,
+        "expense": 156400,
+        "balance": 85400,
+        "accounts": 24,
+        "deltas": {
+          "income": 8.4,
+          "expense": -3.2,
+          "balance": 12.5,
+          "accounts": 3.8
+        }
+      },
+      "charts": {
+        "income": {
+          "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
+          "values": [54000, 61200, 46800, 79800]
+        },
+        "expense": {
+          "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
+          "values": [32400, 40100, 36200, 47800]
+        },
+        "spending": {
+          "labels": ["Food", "Bills", "Travel", "Shopping", "Other"],
+          "values": [26, 20, 14, 28, 12]
+        }
+      },
+      "transactions": [
+        {
+          "date": "2026-04-12",
+          "category": "Travel",
+          "description": "Flight tickets",
+          "amount": -680
+        },
+        {
+          "date": "2026-04-09",
+          "category": "Salary",
+          "description": "Monthly salary",
+          "amount": 5400
+        },
+        {
+          "date": "2026-04-07",
+          "category": "Bills",
+          "description": "Utilities",
+          "amount": -210
+        },
+        {
+          "date": "2026-04-05",
+          "category": "Shopping",
+          "description": "Smartwatch",
+          "amount": -320
+        }
+      ]
+    },
+    "year": {
+      "metrics": {
+        "income": 2984000,
+        "expense": 1846000,
+        "balance": 1138000,
+        "accounts": 28,
+        "deltas": {
+          "income": 10.2,
+          "expense": 4.9,
+          "balance": 9.3,
+          "accounts": 6.5
+        }
+      },
+      "charts": {
+        "income": {
+          "labels": ["Q1", "Q2", "Q3", "Q4"],
+          "values": [660000, 744000, 800000, 896000]
+        },
+        "expense": {
+          "labels": ["Q1", "Q2", "Q3", "Q4"],
+          "values": [390000, 454000, 498000, 560000]
+        },
+        "spending": {
+          "labels": ["Food", "Bills", "Travel", "Shopping", "Other"],
+          "values": [24, 22, 15, 27, 12]
+        }
+      },
+      "transactions": [
+        {
+          "date": "2026-03-28",
+          "category": "Investments",
+          "description": "ETF contribution",
+          "amount": -1200
+        },
+        {
+          "date": "2026-03-20",
+          "category": "Salary",
+          "description": "Annual bonus",
+          "amount": 18400
+        },
+        {
+          "date": "2026-03-11",
+          "category": "Travel",
+          "description": "Hotel stay",
+          "amount": -940
+        },
+        {
+          "date": "2026-02-21",
+          "category": "Shopping",
+          "description": "Laptop",
+          "amount": -1680
+        }
+      ]
+    }
+  }
+}

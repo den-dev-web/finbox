@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./assets/icons/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FinBox — Dashboard</title>
+    <meta
+      name="description"
+      content="FinBox — financial analytics dashboard."
+    />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body>
+    <div class="o-shell">
+      <aside class="o-sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
+        <div class="o-container">
+          <div class="c-sidebar">
+            <p class="c-sidebar__logo">FinBox</p>
+            <nav aria-label="Primary">
+              <ul class="c-sidebar__nav">
+                <li>
+                  <a class="c-sidebar__link" href="#" aria-current="page"
+                    >Dashboard</a
+                  >
+                </li>
+                <li><a class="c-sidebar__link" href="#">Reports</a></li>
+                <li><a class="c-sidebar__link" href="#">Accounts</a></li>
+                <li><a class="c-sidebar__link" href="#">Settings</a></li>
+              </ul>
+            </nav>
+            <div class="c-sidebar__actions">
+              <button
+                class="c-header__button c-sidebar__theme"
+                type="button"
+                data-theme-toggle
+                aria-label="Toggle theme"
+              >
+                Theme
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <div
+        class="c-sidebar__overlay"
+        aria-hidden="true"
+        data-sidebar-overlay
+      ></div>
+
+      <div class="o-content">
+        <header class="o-header">
+          <div class="o-container c-header">
+            <button
+              class="c-header__button"
+              type="button"
+              aria-label="Open menu"
+              aria-controls="sidebar"
+              aria-expanded="false"
+              data-sidebar-toggle
+            >
+              Menu
+            </button>
+            <h1 class="c-header__title">Dashboard</h1>
+            <div class="c-header__actions">
+              <div class="c-dropdown" data-dropdown>
+                <button
+                  class="c-header__button c-dropdown__trigger"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="period-menu"
+                  data-dropdown-trigger
+                >
+                  Period: Month
+                </button>
+                <div
+                  class="c-dropdown__panel"
+                  id="period-menu"
+                  role="listbox"
+                  tabindex="-1"
+                  data-dropdown-panel
+                >
+                  <button
+                    class="c-dropdown__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-value="day"
+                  >
+                    Day
+                  </button>
+                  <button
+                    class="c-dropdown__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-value="week"
+                  >
+                    Week
+                  </button>
+                  <button
+                    class="c-dropdown__option"
+                    type="button"
+                    role="option"
+                    aria-selected="true"
+                    tabindex="0"
+                    data-value="month"
+                  >
+                    Month
+                  </button>
+                  <button
+                    class="c-dropdown__option"
+                    type="button"
+                    role="option"
+                    aria-selected="false"
+                    tabindex="-1"
+                    data-value="year"
+                  >
+                    Year
+                  </button>
+                </div>
+              </div>
+              <button
+                class="c-header__button c-header__button--theme"
+                type="button"
+                data-theme-toggle
+                aria-label="Toggle theme"
+              >
+                Theme
+              </button>
+            </div>
+            <span class="c-header__profile" aria-label="Profile">JD</span>
+          </div>
+        </header>
+
+        <main class="o-main">
+          <div class="o-container">
+            <div class="o-dashboard-grid" aria-label="Dashboard widgets">
+              <section
+                class="c-card c-metric c-metric--income u-reveal"
+                data-state="loading"
+                data-metric="income"
+                data-metric-format="currency"
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Income</h2>
+                  </div>
+                  <span class="c-metric__delta" data-metric-delta>—</span>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-metric-value>—</p>
+                    <p class="c-metric__summary">
+                      Primary inflow from payroll, investments, and side revenue
+                      captured in real time.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button class="c-metric__retry" type="button">Retry</button>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--expense u-reveal"
+                data-state="loading"
+                data-metric="expense"
+                data-metric-format="currency"
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Expenses</h2>
+                  </div>
+                  <span class="c-metric__delta" data-metric-delta>—</span>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-metric-value>—</p>
+                    <p class="c-metric__summary">
+                      Total outflows across bills, travel, and discretionary
+                      spend, tracked per period.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button class="c-metric__retry" type="button">Retry</button>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--balance u-reveal"
+                data-state="loading"
+                data-metric="balance"
+                data-metric-format="currency"
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Balance</h2>
+                  </div>
+                  <span class="c-metric__delta" data-metric-delta>—</span>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-metric-value>—</p>
+                    <p class="c-metric__summary">
+                      Net position after expenses, highlighting savings momentum
+                      and buffer for upcoming cycles.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button class="c-metric__retry" type="button">Retry</button>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--accounts u-reveal"
+                data-state="loading"
+                data-metric="accounts"
+                data-metric-format="number"
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Active Accounts</h2>
+                  </div>
+                  <span class="c-metric__delta" data-metric-delta>—</span>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-metric-value>—</p>
+                    <p class="c-metric__summary">
+                      Live accounts connected and synced, showing how many
+                      sources update this view.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button class="c-metric__retry" type="button">Retry</button>
+                  </div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-chart-card u-reveal"
+                data-state="loading"
+                data-chart-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Income Trend</h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div class="c-chart" data-chart="line" data-series="income">
+                      <span class="c-chart__unit">USD</span>
+                      <svg
+                        class="c-chart__svg"
+                        viewBox="0 0 320 180"
+                        aria-hidden="true"
+                      ></svg>
+                      <div class="c-chart__labels" data-chart-labels></div>
+                      <div class="c-chart__stats" data-chart-stats></div>
+                    </div>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-chart-card u-reveal"
+                data-state="loading"
+                data-chart-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Expense Trend</h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div
+                      class="c-chart"
+                      data-chart="line"
+                      data-series="expense"
+                    >
+                      <span class="c-chart__unit">USD</span>
+                      <svg
+                        class="c-chart__svg"
+                        viewBox="0 0 320 180"
+                        aria-hidden="true"
+                      ></svg>
+                      <div class="c-chart__labels" data-chart-labels></div>
+                      <div class="c-chart__stats" data-chart-stats></div>
+                    </div>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-chart-card o-dashboard-grid__span-2 u-reveal"
+                data-state="loading"
+                data-chart-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Spending Split</h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div
+                      class="c-chart c-chart--doughnut"
+                      data-chart="doughnut"
+                      data-series="spending"
+                    >
+                      <svg
+                        class="c-chart__svg"
+                        viewBox="0 0 220 220"
+                        aria-hidden="true"
+                      ></svg>
+                      <div class="c-chart__legend" data-chart-legend></div>
+                    </div>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-table-card o-dashboard-grid__span-4 u-reveal"
+                data-state="loading"
+                data-table-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Latest Transactions</h2>
+                  <div class="c-table__filters">
+                    <div class="c-table__filter-chips" data-table-filters></div>
+                    <button
+                      class="c-table__filter-reset"
+                      type="button"
+                      data-table-filter-reset
+                    >
+                      Reset
+                    </button>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div class="c-table__cards" data-table-cards></div>
+                    <div
+                      class="c-table__empty-card"
+                      data-table-empty-card
+                      hidden
+                    >
+                      No transactions found.
+                    </div>
+                    <table class="c-table" aria-label="Latest transactions">
+                      <thead class="c-table__head">
+                        <tr>
+                          <th scope="col">
+                            <button
+                              class="c-table__sort"
+                              type="button"
+                              data-sort-key="date"
+                              aria-sort="none"
+                            >
+                              Date
+                              <span
+                                class="c-table__sort-indicator"
+                                aria-hidden="true"
+                                >↕</span
+                              >
+                            </button>
+                          </th>
+                          <th scope="col">Category</th>
+                          <th scope="col">Description</th>
+                          <th scope="col">
+                            <button
+                              class="c-table__sort"
+                              type="button"
+                              data-sort-key="amount"
+                              aria-sort="none"
+                            >
+                              Amount
+                              <span
+                                class="c-table__sort-indicator"
+                                aria-hidden="true"
+                                >↕</span
+                              >
+                            </button>
+                          </th>
+                          <th scope="col" class="c-table__head-actions">
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody data-table-body></tbody>
+                      <tbody data-table-skeleton aria-hidden="true">
+                        <tr>
+                          <td colspan="5">
+                            <div class="c-table__skeleton-row"></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="5">
+                            <div class="c-table__skeleton-row"></div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="5">
+                            <div class="c-table__skeleton-row"></div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      <tbody data-table-empty hidden>
+                        <tr>
+                          <td colspan="5" class="c-table__empty">
+                            No transactions found.
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="c-table__pagination" data-table-pagination>
+                    <span class="c-table__page-summary" data-page-summary
+                      >Showing 0–0 of 0</span
+                    >
+                    <label class="c-table__page-size">
+                      Rows per page
+                      <select class="c-table__page-select" data-page-size>
+                        <option value="4">4</option>
+                        <option value="6">6</option>
+                        <option value="8">8</option>
+                        <option value="10" selected>10</option>
+                      </select>
+                    </label>
+                    <div class="c-table__page-controls">
+                      <span class="c-table__page-info" data-page-info
+                        >Page 1 of 1</span
+                      >
+                      <button
+                        class="c-table__page-btn"
+                        type="button"
+                        data-page-first
+                        aria-label="First page"
+                      >
+                        «
+                      </button>
+                      <button
+                        class="c-table__page-btn"
+                        type="button"
+                        data-page-prev
+                        aria-label="Previous page"
+                      >
+                        ‹
+                      </button>
+                      <button
+                        class="c-table__page-btn"
+                        type="button"
+                        data-page-next
+                        aria-label="Next page"
+                      >
+                        ›
+                      </button>
+                      <button
+                        class="c-table__page-btn"
+                        type="button"
+                        data-page-last
+                        aria-label="Last page"
+                      >
+                        »
+                      </button>
+                    </div>
+                  </div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button class="c-table__retry" type="button">Retry</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </main>
+
+        <footer class="o-footer">
+          <div class="o-container">
+            <small>FinBox © 2026</small>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="./src/js/main.js"></script>
+  </body>
+</html>
