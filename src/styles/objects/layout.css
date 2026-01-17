@@ -106,4 +106,8 @@
   .o-dashboard-grid {
     grid-template-columns: repeat(4, minmax(220px, 1fr));
   }
+
+  .o-dashboard-grid__span-4 {
+    grid-column: span 4;
+  }
 }
