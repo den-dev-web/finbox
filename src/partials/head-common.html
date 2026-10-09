@@ -16,6 +16,18 @@
     document.documentElement.dataset.theme = theme;
   })();
 </script>
+<!--
+  Cross-document view transitions. Inline on purpose: Chrome checks the new
+  page's opt-in before an external stylesheet may have arrived and aborts with
+  "ViewTransition opt-in disabled".
+-->
+<style>
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+</style>
 <link rel="icon" type="image/png" href="/assets/icons/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta
