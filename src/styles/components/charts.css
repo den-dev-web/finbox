@@ -1,3 +1,8 @@
+/* Chart cards are query containers: chart layout follows the card width, not the viewport */
+.c-chart-card {
+  container: chart / inline-size;
+}
+
 .c-chart {
   display: grid;
   gap: var(--space-sm);
@@ -76,7 +81,6 @@ html[data-theme="dark"] .c-chart__svg {
 
 .c-chart__stats {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.35rem 1rem;
   padding-top: 0.4rem;
   font-size: 0.78rem;
@@ -128,7 +132,15 @@ html[data-theme="dark"] .c-chart__svg {
   flex-shrink: 0;
 }
 
-@media (width >= 720px) {
+/* Two stat columns fit label and value side by side from 260px */
+@container chart (width >= 260px) {
+  .c-chart__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Side-by-side doughnut needs 240px + 160px tracks plus the gap */
+@container chart (width >= 420px) {
   .c-chart--doughnut {
     grid-template-columns: minmax(240px, 1fr) minmax(160px, 0.6fr);
     gap: 0.4rem;
