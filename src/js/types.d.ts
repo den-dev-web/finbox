@@ -82,5 +82,9 @@ declare global {
     "data:loaded": CustomEvent<DataLoadedDetail>;
     "data:error": CustomEvent<DataErrorDetail>;
     "period:change": CustomEvent<PeriodChangeDetail>;
+    /** The store started loading a period (initial load, period change, retry) */
+    "data:loading": CustomEvent<PeriodChangeDetail>;
+    /** A widget asks the store to reload the current period */
+    "data:retry": CustomEvent<null>;
   }
 }

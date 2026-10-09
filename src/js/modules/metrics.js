@@ -6,7 +6,6 @@ const formatNumber = new Intl.NumberFormat("en-US", {
 
 /** @typedef {import("../types").Metrics} Metrics */
 /** @typedef {import("../types").MetricKey} MetricKey */
-/** @typedef {import("../types").Period} Period */
 
 /**
  * Formats a percentage change with a direction arrow, e.g. "▲ 8.4%".
@@ -30,10 +29,6 @@ export default function initMetrics() {
   if (cards.length === 0) {
     return;
   }
-
-  // Period of the last request, reloaded by the Retry button
-  /** @type {{ period: Period }} */
-  const state = { period: "month" };
 
   /**
    * @param {HTMLElement} card
@@ -79,21 +74,12 @@ export default function initMetrics() {
     const retryButton = card.querySelector(".c-metric__retry");
     if (retryButton) {
       retryButton.addEventListener("click", () => {
-        document.dispatchEvent(
-          new CustomEvent("period:change", {
-            detail: { period: state.period },
-          }),
-        );
+        document.dispatchEvent(new CustomEvent("data:retry"));
       });
     }
   });
 
-  document.addEventListener("period:change", (event) => {
-    if (event.detail?.period) {
-      state.period = event.detail.period;
-      setLoading();
-    }
-  });
+  document.addEventListener("data:loading", setLoading);
 
   document.addEventListener("data:loaded", (event) => {
     const data = event.detail?.data;

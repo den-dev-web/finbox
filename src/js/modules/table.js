@@ -10,7 +10,6 @@ import {
 } from "./table/model.js";
 import { createCard, createFilter, createRow } from "./table/render.js";
 
-/** @typedef {import("../types").Period} Period */
 /** @typedef {import("../types").Transaction} Transaction */
 /** @typedef {import("./table/model.js").FilterField} FilterField */
 /** @typedef {import("./table/model.js").Filters} Filters */
@@ -79,12 +78,11 @@ export default function initTable() {
 
   /**
    * @type {{
-   *   period: Period, sortKey: SortKey, sortDirection: SortDirection,
+   *   sortKey: SortKey, sortDirection: SortDirection,
    *   rows: Transaction[], page: number, pageSize: number, filters: Filters
    * }}
    */
   const state = {
-    period: "month",
     sortKey: "date",
     sortDirection: "desc",
     rows: [],
@@ -516,18 +514,11 @@ export default function initTable() {
 
   if (retryButton) {
     retryButton.addEventListener("click", () => {
-      document.dispatchEvent(
-        new CustomEvent("period:change", { detail: { period: state.period } }),
-      );
+      document.dispatchEvent(new CustomEvent("data:retry"));
     });
   }
 
-  document.addEventListener("period:change", (event) => {
-    if (event.detail?.period) {
-      state.period = event.detail.period;
-      setLoading();
-    }
-  });
+  document.addEventListener("data:loading", setLoading);
 
   document.addEventListener("data:loaded", (event) => {
     const data = event.detail?.data;

@@ -29,8 +29,16 @@ const notifyError = (period, error) => {
   );
 };
 
+/** @param {Period} period */
+const notifyLoading = (period) => {
+  document.dispatchEvent(
+    new CustomEvent("data:loading", { detail: { period } }),
+  );
+};
+
 const load = async () => {
   state.status = "loading";
+  notifyLoading(state.period);
   try {
     const data = await getDashboard(state.period);
     state.status = "success";
@@ -48,6 +56,9 @@ export default function initStore() {
       load();
     }
   });
+
+  // Retry always reloads the store's own period, the single source of truth
+  document.addEventListener("data:retry", load);
 
   load();
 }

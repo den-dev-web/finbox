@@ -349,11 +349,7 @@ export default function initCharts() {
     card.dataset.state = "default";
   };
 
-  document.addEventListener("period:change", (event) => {
-    if (event.detail?.period) {
-      setLoading();
-    }
-  });
+  document.addEventListener("data:loading", setLoading);
 
   document.addEventListener("data:loaded", (event) => {
     const data = event.detail?.data;
