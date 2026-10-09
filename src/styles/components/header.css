@@ -51,7 +51,7 @@
   background: var(--color-bg-alt);
 }
 
-@media (width <= 720px) {
+@media (max-width: 720px) {
   .c-header {
     flex-wrap: wrap;
     align-items: center;
@@ -85,20 +85,20 @@
   }
 }
 
-@media (width <= 560px) {
+@media (max-width: 560px) {
   .c-header__button {
     padding: 0.35rem 0.5rem;
     font-size: 0.8rem;
   }
 }
 
-@media (width <= 1023px) {
+@media (max-width: 1023px) {
   .c-header__button--theme {
     display: none;
   }
 }
 
-@media (width >= 1024px) {
+@media (min-width: 1024px) {
   [data-sidebar-toggle] {
     display: none;
   }

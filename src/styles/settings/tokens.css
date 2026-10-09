@@ -8,6 +8,7 @@
   --color-primary-text: #2459d6;
   --color-success: #18a273;
   --color-danger: #d94b4b;
+  --color-accent: #f5b941;
 
   /* Text variants of brand and status colors meet WCAG AA (4.5:1) on cards and badges */
   --color-success-text: #0e7553;

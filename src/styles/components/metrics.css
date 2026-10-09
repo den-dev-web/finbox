@@ -18,7 +18,7 @@
 }
 
 .c-metric--accounts .c-metric__indicator {
-  background: #f5b941;
+  background: var(--color-accent);
 }
 
 .c-metric__title {
@@ -84,7 +84,7 @@ html[data-theme="dark"] .c-metric__delta[data-delta-state="negative"] {
   box-shadow: var(--focus-ring);
 }
 
-@media (width <= 560px) {
+@media (max-width: 560px) {
   .c-metric__title {
     gap: 0.35rem;
   }
