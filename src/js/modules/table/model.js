@@ -9,9 +9,12 @@ export const formatCurrency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
+// Date-only strings ("2026-04-12") parse as UTC midnight; formatting in UTC
+// keeps the calendar date instead of shifting it in negative-offset zones
 export const formatDate = new Intl.DateTimeFormat("en-GB", {
   day: "2-digit",
   month: "short",
+  timeZone: "UTC",
 });
 
 const sorters = {
