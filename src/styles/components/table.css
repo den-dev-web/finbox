@@ -11,7 +11,7 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgb(27 30 40 / 60%);
+  color: var(--color-text-muted);
   border-bottom: 0;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .c-table__date {
-  color: rgb(27 30 40 / 70%);
+  color: var(--color-text-muted);
   font-size: 0.8rem;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .c-table__description {
-  color: rgb(27 30 40 / 72%);
+  color: var(--color-text-muted);
 }
 
 .c-table__amount {
@@ -275,11 +275,11 @@
 }
 
 .c-table__amount--positive {
-  color: var(--color-success);
+  color: var(--color-success-text);
 }
 
 .c-table__amount--negative {
-  color: var(--color-danger);
+  color: var(--color-danger-text);
 }
 
 .c-table__skeleton-row {
@@ -304,17 +304,7 @@
 .c-table__empty {
   text-align: center;
   padding: 1rem 0.4rem;
-  color: rgb(27 30 40 / 60%);
-}
-
-html[data-theme="dark"] .c-table__empty {
-  color: rgb(231 235 245 / 60%);
-}
-
-html[data-theme="dark"] .c-table__head th,
-html[data-theme="dark"] .c-table__date,
-html[data-theme="dark"] .c-table__description {
-  color: rgb(231 235 245 / 65%);
+  color: var(--color-text-muted);
 }
 
 .c-table__retry {
@@ -362,7 +352,7 @@ html[data-theme="dark"] .c-table__description {
 
 .c-table__page-summary {
   font-size: 0.75rem;
-  color: rgb(27 30 40 / 60%);
+  color: var(--color-text-muted);
 }
 
 .c-table__page-size {
@@ -370,7 +360,7 @@ html[data-theme="dark"] .c-table__description {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.75rem;
-  color: rgb(27 30 40 / 60%);
+  color: var(--color-text-muted);
 }
 
 .c-table__page-select {
@@ -390,7 +380,7 @@ html[data-theme="dark"] .c-table__description {
 
 .c-table__page-info {
   font-size: 0.75rem;
-  color: rgb(27 30 40 / 60%);
+  color: var(--color-text-muted);
 }
 
 .c-table__page-btn {
@@ -453,20 +443,7 @@ html[data-theme="dark"] .c-table__description {
   display: none;
   text-align: center;
   padding: 1rem 0.4rem;
-  color: rgb(27 30 40 / 60%);
-}
-
-html[data-theme="dark"] .c-table__page-info {
-  color: rgb(231 235 245 / 60%);
-}
-
-html[data-theme="dark"] .c-table__page-summary,
-html[data-theme="dark"] .c-table__page-size {
-  color: rgb(231 235 245 / 60%);
-}
-
-html[data-theme="dark"] .c-table__empty-card {
-  color: rgb(231 235 245 / 60%);
+  color: var(--color-text-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {
