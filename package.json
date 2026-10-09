@@ -15,6 +15,7 @@
     "lint:css": "stylelint $(git ls-files --cached --others --exclude-standard \"*.css\")",
     "format": "prettier --write . && stylelint \"src/**/*.css\" --fix",
     "typecheck": "tsc -p jsconfig.json",
+    "test:unit": "vitest run",
     "pw": "${CONTAINER_CLI:-podman} run --rm --network host --ipc host -e CI -v \"$PWD\":/work:z -w /work mcr.microsoft.com/playwright:v1.63.0-noble npx playwright test",
     "test:e2e": "npm run pw -- --project=smoke --project=smoke-mobile --project=html --project=a11y-desktop --project=a11y-mobile",
     "test:visual": "npm run pw -- --project=\"visual-*\"",
@@ -32,7 +33,8 @@
     "stylelint": "^17.16.0",
     "stylelint-config-standard": "^40.0.0",
     "typescript": "^7.0.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "vitest": "^5.0.3"
   },
   "browserslist": [
     "last 2 Chrome versions",

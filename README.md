@@ -38,13 +38,13 @@ Measured on the live demo, light and dark themes.
 
 ## ⚙️ Tech Stack
 
-| Area           | Tools                                                                        |
-| :------------- | :--------------------------------------------------------------------------- |
-| Markup & logic | HTML5, CSS, JavaScript (ES modules) — no frameworks, no runtime dependencies |
-| Build          | Vite                                                                         |
-| Code quality   | ESLint, Stylelint, Prettier                                                  |
-| Testing        | Playwright (smoke, axe accessibility, visual regression), html-validate      |
-| CI/CD          | GitHub Actions → GitHub Pages                                                |
+| Area           | Tools                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------- |
+| Markup & logic | HTML5, CSS, JavaScript (ES modules) — no frameworks, no runtime dependencies           |
+| Build          | Vite                                                                                   |
+| Code quality   | ESLint, Stylelint, Prettier                                                            |
+| Testing        | Vitest (unit), Playwright (smoke, axe accessibility, visual regression), html-validate |
+| CI/CD          | GitHub Actions → GitHub Pages                                                          |
 
 ---
 
@@ -81,6 +81,7 @@ npm run build      # production build to dist/
 npm run preview    # serve the production build
 npm run lint       # ESLint + Stylelint + Prettier check
 npm run format     # auto-fix formatting
+npm run test:unit  # unit tests for table, chart and API logic
 npm run test:e2e   # smoke, accessibility and HTML tests
 npm run test:visual # screenshot comparison: 3 browsers × 3 widths × 2 themes
 ```

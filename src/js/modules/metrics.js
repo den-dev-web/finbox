@@ -8,7 +8,7 @@ const formatNumber = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
-const formatDelta = (value) => {
+export const formatDelta = (value) => {
   if (typeof value !== "number") {
     return "—";
   }

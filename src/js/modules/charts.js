@@ -93,7 +93,7 @@ const buildLineChart = (svg, labels, values, variant) => {
   return labels;
 };
 
-const computeLineStats = (values) => {
+export const computeLineStats = (values) => {
   if (!Array.isArray(values) || values.length === 0) {
     return null;
   }
