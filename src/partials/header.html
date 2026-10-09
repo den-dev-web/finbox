@@ -1,0 +1,28 @@
+<header class="o-header">
+  <div class="o-container c-header">
+    <button
+      class="c-header__button"
+      type="button"
+      aria-label="Open menu"
+      aria-controls="sidebar"
+      aria-expanded="false"
+      data-sidebar-toggle
+    >
+      Menu
+    </button>
+    <h1 class="c-header__title">{{title}}</h1>
+    <div class="c-header__actions">
+      <!-- @slot -->
+      <button
+        class="c-header__button c-header__button--theme"
+        type="button"
+        data-theme-toggle
+      >
+        Theme
+      </button>
+    </div>
+    <span class="c-header__profile" role="img" aria-label="Profile: JD"
+      >JD</span
+    >
+  </div>
+</header>

@@ -10,16 +10,44 @@ const PAGES = {
 };
 
 const INCLUDE_PATTERN = /<!-- @include ([\w-]+) -->/g;
+const BLOCK_PATTERN =
+  /<!-- @block ([\w-]+)((?: [\w-]+="[^"]*")*) -->([\s\S]*?)<!-- @endblock -->/g;
+const PARAM_PATTERN = / ([\w-]+)="([^"]*)"/g;
+const PLACEHOLDER_PATTERN = /\{\{([\w-]+)\}\}/g;
 const NAV_PATTERN = / data-nav="([\w-]+)"/g;
+
+const readPartial = (name) =>
+  readFileSync(root(`./src/partials/${name}.html`), "utf8");
+
+// Fills {{param}} placeholders and the <!-- @slot --> of a block partial;
+// a missing parameter fails the build instead of shipping "{{title}}"
+const renderBlock = (name, paramsSource, slot) => {
+  const params = Object.fromEntries(
+    [...paramsSource.matchAll(PARAM_PATTERN)].map(([, key, value]) => [
+      key,
+      value,
+    ]),
+  );
+  return readPartial(name)
+    .replace(PLACEHOLDER_PATTERN, (_, key) => {
+      if (!(key in params)) {
+        throw new Error(`Partial "${name}" needs the "${key}" parameter`);
+      }
+      return params[key];
+    })
+    .replace("<!-- @slot -->", slot.trim());
+};
 
 // "/index.html" -> "dashboard", "/reports/index.html" -> "reports"
 const pageName = (path) =>
   path === "/index.html" ? "dashboard" : path.split("/")[1];
 
 /**
- * Inlines shared markup from src/partials/<name>.html in place of
- * `<!-- @include name -->`, then turns the current page's `data-nav`
- * link into `aria-current="page"` and drops the attribute elsewhere.
+ * Inlines shared markup from src/partials/<name>.html:
+ * - `<!-- @include name -->` inserts the partial as is;
+ * - `<!-- @block name key="value" -->slot<!-- @endblock -->` also fills
+ *   {{key}} placeholders and puts the slot content at `<!-- @slot -->`.
+ * Then the current page's `data-nav` link becomes `aria-current="page"`.
  */
 const htmlPartials = () => ({
   name: "finbox-html-partials",
@@ -28,9 +56,10 @@ const htmlPartials = () => ({
     handler(html, { path }) {
       const page = pageName(path);
       return html
-        .replace(INCLUDE_PATTERN, (_, name) =>
-          readFileSync(root(`./src/partials/${name}.html`), "utf8"),
+        .replace(BLOCK_PATTERN, (_, name, params, slot) =>
+          renderBlock(name, params, slot),
         )
+        .replace(INCLUDE_PATTERN, (_, name) => readPartial(name))
         .replace(NAV_PATTERN, (_, nav) =>
           nav === page ? ' aria-current="page"' : "",
         );
