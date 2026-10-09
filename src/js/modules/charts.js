@@ -1,3 +1,5 @@
+import { displayCurrency, formatMoney } from "../utils/format.js";
+
 const CHART_COLORS = [
   "var(--color-primary)",
   "var(--color-success)",
@@ -5,12 +7,6 @@ const CHART_COLORS = [
   "#f5b941",
   "#7a6ff0",
 ];
-
-const formatCurrency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
 
 /** @typedef {import("../types").DashboardData} DashboardData */
 /** @typedef {{ avg: number, min: number, max: number, change: number | null }} LineStats */
@@ -157,15 +153,15 @@ const renderStats = (container, stats) => {
   container.innerHTML = `
     <div class="c-chart__stat">
       <span class="c-chart__stat-label">Avg</span>
-      <span class="c-chart__stat-value">${formatCurrency.format(stats.avg)}</span>
+      <span class="c-chart__stat-value">${formatMoney(stats.avg)}</span>
     </div>
     <div class="c-chart__stat">
       <span class="c-chart__stat-label">Peak</span>
-      <span class="c-chart__stat-value">${formatCurrency.format(stats.max)}</span>
+      <span class="c-chart__stat-value">${formatMoney(stats.max)}</span>
     </div>
     <div class="c-chart__stat">
       <span class="c-chart__stat-label">Low</span>
-      <span class="c-chart__stat-value">${formatCurrency.format(stats.min)}</span>
+      <span class="c-chart__stat-value">${formatMoney(stats.min)}</span>
     </div>
     <div class="c-chart__stat">
       <span class="c-chart__stat-label">Change</span>
@@ -280,6 +276,10 @@ export default function initCharts() {
   if (chartCards.length === 0) {
     return;
   }
+
+  document.querySelectorAll(".c-chart__unit").forEach((unit) => {
+    unit.textContent = displayCurrency();
+  });
 
   /** @type {{ data: DashboardData | null }} */
   const state = {

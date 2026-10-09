@@ -1,8 +1,4 @@
-const formatCurrency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
+import { formatMoney } from "../utils/format.js";
 
 const formatNumber = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
@@ -53,9 +49,7 @@ export default function initMetrics() {
 
     if (valueEl) {
       valueEl.textContent =
-        format === "number"
-          ? formatNumber.format(value)
-          : formatCurrency.format(value);
+        format === "number" ? formatNumber.format(value) : formatMoney(value);
     }
     if (deltaEl) {
       const key = /** @type {MetricKey} */ (card.dataset.metric);

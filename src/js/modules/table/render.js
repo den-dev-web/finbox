@@ -1,5 +1,6 @@
 // DOM builders for table rows, mobile cards and filter menus.
-import { formatCurrency, formatDate } from "./model.js";
+import { formatMoney } from "../../utils/format.js";
+import { formatDate } from "./model.js";
 
 /** @typedef {import("../../types").Transaction} Transaction */
 
@@ -47,7 +48,7 @@ const createAmount = (tag, amount) =>
     `c-table__amount ${
       amount >= 0 ? "c-table__amount--positive" : "c-table__amount--negative"
     }`,
-    formatCurrency.format(amount),
+    formatMoney(amount, { cents: true }),
   );
 
 // "⋮" toggle with an Edit / Delete menu; returns both so callers place them

@@ -2,6 +2,8 @@
 
 export type Period = "day" | "week" | "month" | "year";
 
+export type Currency = "USD" | "EUR" | "UAH";
+
 export type MetricKey = "income" | "expense" | "balance" | "accounts";
 
 export type Metrics = Record<MetricKey, number> & {

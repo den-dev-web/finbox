@@ -1,4 +1,5 @@
 // Pure table logic: no DOM access, so it can be unit-tested in isolation.
+import { formatMoney } from "../../utils/format.js";
 
 /** @typedef {import("../../types").Transaction} Transaction */
 /** @typedef {"date" | "category" | "description" | "amount"} FilterField */
@@ -9,14 +10,6 @@
 
 /** @type {FilterField[]} */
 export const FILTER_FIELDS = ["date", "category", "description", "amount"];
-
-// Statement style: always show cents so the amount column lines up
-export const formatCurrency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
 
 // Date-only strings ("2026-04-12") parse as UTC midnight; formatting in UTC
 // keeps the calendar date instead of shifting it in negative-offset zones
@@ -68,7 +61,8 @@ export const normalizeValue = (field, row) => {
     return formatDate.format(new Date(row.date));
   }
   if (field === "amount") {
-    return formatCurrency.format(row.amount);
+    // Statement style: always show cents so the amount column lines up
+    return formatMoney(row.amount, { cents: true });
   }
   return row[field] ?? "";
 };
