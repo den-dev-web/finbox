@@ -15,7 +15,7 @@ test.beforeEach(async ({ page }) => {
 test("dashboard loads with one h1 and data", async ({ page }) => {
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(incomeValue(page)).toHaveText("$241,800");
-  await expect(page.locator("[data-table-body] tr")).toHaveCount(4);
+  await expect(page.locator("[data-table-body] tr")).toHaveCount(10);
 });
 
 test("period dropdown reloads data", async ({ page }) => {
@@ -41,19 +41,17 @@ test("table sorts by amount", async ({ page }) => {
   const header = page.locator("th", { has: sortButton });
   await sortButton.click();
   await expect(header).toHaveAttribute("aria-sort", "descending");
-  expect(await amounts(page)).toEqual([
+  expect((await amounts(page)).slice(0, 3)).toEqual([
     "$5,400.00",
-    "-$210.00",
-    "-$320.00",
-    "-$680.00",
+    "$398.00",
+    "$22.16",
   ]);
   await sortButton.click();
   await expect(header).toHaveAttribute("aria-sort", "ascending");
-  expect(await amounts(page)).toEqual([
+  expect((await amounts(page)).slice(0, 3)).toEqual([
     "-$680.00",
     "-$320.00",
     "-$210.00",
-    "$5,400.00",
   ]);
 });
 
@@ -67,7 +65,7 @@ test("table filters by category and resets", async ({ page }) => {
   await expect(chip).toHaveText("Category: Travel");
   await expect(rows).toHaveCount(1);
   await page.locator("[data-table-filter-reset]").click();
-  await expect(rows).toHaveCount(4);
+  await expect(rows).toHaveCount(10);
 });
 
 test("row action menu opens and closes with Escape", async ({ page }) => {
@@ -79,4 +77,20 @@ test("row action menu opens and closes with Escape", async ({ page }) => {
   await page.keyboard.press("Escape");
   await expect(toggle).toHaveAttribute("aria-expanded", "false");
   await expect(menu).toBeHidden();
+});
+
+test("table paginates and changes page size", async ({ page }) => {
+  const summary = page.locator("[data-page-summary]");
+  const info = page.locator("[data-page-info]");
+  await expect(summary).toHaveText("Showing 1–10 of 24");
+  await expect(page.locator("[data-page-prev]")).toBeDisabled();
+  await page.locator("[data-page-next]").click();
+  await expect(summary).toHaveText("Showing 11–20 of 24");
+  await expect(info).toHaveText("Page 2 of 3");
+  await page.locator("[data-page-last]").click();
+  await expect(summary).toHaveText("Showing 21–24 of 24");
+  await expect(page.locator("[data-page-next]")).toBeDisabled();
+  await page.locator("[data-page-size]").selectOption("4");
+  await expect(info).toHaveText("Page 1 of 6");
+  await expect(page.locator("[data-table-body] tr")).toHaveCount(4);
 });

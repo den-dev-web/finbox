@@ -51,6 +51,126 @@
           "category": "Travel",
           "description": "Taxi",
           "amount": -16.5
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -36
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Freelance",
+          "description": "Bug fixing",
+          "amount": 604.76
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Food",
+          "description": "Dinner out",
+          "amount": -30.52
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -17.23
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Parking",
+          "amount": -38
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Investments",
+          "description": "Dividends",
+          "amount": 79.2
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Shopping",
+          "description": "Headphones",
+          "amount": -133.26
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Health",
+          "description": "Vitamins",
+          "amount": -81.27
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Health",
+          "description": "Vitamins",
+          "amount": -62
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Train ticket",
+          "amount": -29
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Metro card",
+          "amount": -53.76
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Investments",
+          "description": "Interest",
+          "amount": 80
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Food",
+          "description": "Dinner out",
+          "amount": -18
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Bills",
+          "description": "Rent share",
+          "amount": -58
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Parking",
+          "amount": -6
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Taxi",
+          "amount": -40.58
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Bills",
+          "description": "Mobile plan",
+          "amount": -71.31
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Freelance",
+          "description": "Bug fixing",
+          "amount": 322.89
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Shopping",
+          "description": "Home decor",
+          "amount": -35
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Freelance",
+          "description": "Bug fixing",
+          "amount": 197
         }
       ]
     },
@@ -83,10 +203,40 @@
       },
       "transactions": [
         {
+          "date": "2026-04-18",
+          "category": "Entertainment",
+          "description": "Streaming",
+          "amount": -59
+        },
+        {
+          "date": "2026-04-18",
+          "category": "Bills",
+          "description": "Electricity",
+          "amount": -120
+        },
+        {
           "date": "2026-04-17",
           "category": "Bills",
           "description": "Internet",
           "amount": -48
+        },
+        {
+          "date": "2026-04-17",
+          "category": "Freelance",
+          "description": "Bug fixing",
+          "amount": 262.78
+        },
+        {
+          "date": "2026-04-17",
+          "category": "Shopping",
+          "description": "Books",
+          "amount": -32
+        },
+        {
+          "date": "2026-04-17",
+          "category": "Transport",
+          "description": "Metro card",
+          "amount": -18.02
         },
         {
           "date": "2026-04-16",
@@ -95,16 +245,106 @@
           "amount": 2180
         },
         {
+          "date": "2026-04-16",
+          "category": "Shopping",
+          "description": "Gift",
+          "amount": -104.32
+        },
+        {
+          "date": "2026-04-16",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -40
+        },
+        {
+          "date": "2026-04-16",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -35
+        },
+        {
           "date": "2026-04-15",
           "category": "Food",
           "description": "Groceries",
           "amount": -132.5
         },
         {
+          "date": "2026-04-15",
+          "category": "Shopping",
+          "description": "Gift",
+          "amount": -147
+        },
+        {
+          "date": "2026-04-15",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -19.47
+        },
+        {
           "date": "2026-04-14",
           "category": "Shopping",
           "description": "Sneakers",
           "amount": -164
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Freelance",
+          "description": "Logo design",
+          "amount": 626
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Bills",
+          "description": "Rent share",
+          "amount": -66.93
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Transport",
+          "description": "Metro card",
+          "amount": -38.94
+        },
+        {
+          "date": "2026-04-13",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -39.95
+        },
+        {
+          "date": "2026-04-13",
+          "category": "Transport",
+          "description": "Taxi",
+          "amount": -32
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Food",
+          "description": "Groceries",
+          "amount": -18.88
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -32
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Transport",
+          "description": "Metro card",
+          "amount": -8.02
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Entertainment",
+          "description": "Cinema",
+          "amount": -32
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -26
         }
       ]
     },
@@ -137,10 +377,70 @@
       },
       "transactions": [
         {
+          "date": "2026-04-18",
+          "category": "Transport",
+          "description": "Taxi",
+          "amount": -47
+        },
+        {
+          "date": "2026-04-17",
+          "category": "Bills",
+          "description": "Mobile plan",
+          "amount": -119
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -36
+        },
+        {
+          "date": "2026-04-14",
+          "category": "Freelance",
+          "description": "Logo design",
+          "amount": 398
+        },
+        {
+          "date": "2026-04-13",
+          "category": "Health",
+          "description": "Dentist",
+          "amount": -48
+        },
+        {
           "date": "2026-04-12",
           "category": "Travel",
           "description": "Flight tickets",
           "amount": -680
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Transport",
+          "description": "Taxi",
+          "amount": -51.15
+        },
+        {
+          "date": "2026-04-12",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -33
+        },
+        {
+          "date": "2026-04-11",
+          "category": "Food",
+          "description": "Dinner out",
+          "amount": -55.53
+        },
+        {
+          "date": "2026-04-11",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -19.81
+        },
+        {
+          "date": "2026-04-10",
+          "category": "Investments",
+          "description": "Dividends",
+          "amount": 22.16
         },
         {
           "date": "2026-04-09",
@@ -149,16 +449,76 @@
           "amount": 5400
         },
         {
+          "date": "2026-04-09",
+          "category": "Food",
+          "description": "Dinner out",
+          "amount": -56.98
+        },
+        {
           "date": "2026-04-07",
           "category": "Bills",
           "description": "Utilities",
           "amount": -210
         },
         {
+          "date": "2026-04-07",
+          "category": "Entertainment",
+          "description": "Concert tickets",
+          "amount": -22
+        },
+        {
+          "date": "2026-04-07",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -26
+        },
+        {
+          "date": "2026-04-06",
+          "category": "Shopping",
+          "description": "Headphones",
+          "amount": -47
+        },
+        {
           "date": "2026-04-05",
           "category": "Shopping",
           "description": "Smartwatch",
           "amount": -320
+        },
+        {
+          "date": "2026-04-04",
+          "category": "Transport",
+          "description": "Train ticket",
+          "amount": -39.04
+        },
+        {
+          "date": "2026-04-04",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -47
+        },
+        {
+          "date": "2026-04-04",
+          "category": "Transport",
+          "description": "Fuel",
+          "amount": -44.43
+        },
+        {
+          "date": "2026-04-04",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -44
+        },
+        {
+          "date": "2026-04-02",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -39.07
+        },
+        {
+          "date": "2026-04-02",
+          "category": "Entertainment",
+          "description": "Board game",
+          "amount": -35
         }
       ]
     },
@@ -191,10 +551,28 @@
       },
       "transactions": [
         {
+          "date": "2026-04-13",
+          "category": "Investments",
+          "description": "Interest",
+          "amount": 117
+        },
+        {
+          "date": "2026-04-04",
+          "category": "Shopping",
+          "description": "Gift",
+          "amount": -74
+        },
+        {
           "date": "2026-03-28",
           "category": "Investments",
           "description": "ETF contribution",
           "amount": -1200
+        },
+        {
+          "date": "2026-03-21",
+          "category": "Bills",
+          "description": "Electricity",
+          "amount": -53.23
         },
         {
           "date": "2026-03-20",
@@ -213,6 +591,108 @@
           "category": "Shopping",
           "description": "Laptop",
           "amount": -1680
+        },
+        {
+          "date": "2026-02-18",
+          "category": "Food",
+          "description": "Bakery",
+          "amount": -58
+        },
+        {
+          "date": "2026-02-06",
+          "category": "Food",
+          "description": "Groceries",
+          "amount": -19
+        },
+        {
+          "date": "2026-01-27",
+          "category": "Freelance",
+          "description": "Logo design",
+          "amount": 583
+        },
+        {
+          "date": "2026-01-21",
+          "category": "Entertainment",
+          "description": "Streaming",
+          "amount": -54
+        },
+        {
+          "date": "2025-12-23",
+          "category": "Food",
+          "description": "Groceries",
+          "amount": -52.4
+        },
+        {
+          "date": "2025-12-17",
+          "category": "Transport",
+          "description": "Train ticket",
+          "amount": -32.5
+        },
+        {
+          "date": "2025-11-09",
+          "category": "Health",
+          "description": "Dentist",
+          "amount": -23
+        },
+        {
+          "date": "2025-11-01",
+          "category": "Food",
+          "description": "Dinner out",
+          "amount": -32.25
+        },
+        {
+          "date": "2025-10-26",
+          "category": "Entertainment",
+          "description": "Streaming",
+          "amount": -32.82
+        },
+        {
+          "date": "2025-10-11",
+          "category": "Investments",
+          "description": "Dividends",
+          "amount": 44
+        },
+        {
+          "date": "2025-09-27",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -37.02
+        },
+        {
+          "date": "2025-09-01",
+          "category": "Bills",
+          "description": "Mobile plan",
+          "amount": -29
+        },
+        {
+          "date": "2025-08-10",
+          "category": "Shopping",
+          "description": "Gift",
+          "amount": -141.15
+        },
+        {
+          "date": "2025-07-11",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -57
+        },
+        {
+          "date": "2025-06-22",
+          "category": "Food",
+          "description": "Cafe lunch",
+          "amount": -39.79
+        },
+        {
+          "date": "2025-04-30",
+          "category": "Transport",
+          "description": "Metro card",
+          "amount": -42.51
+        },
+        {
+          "date": "2025-04-28",
+          "category": "Food",
+          "description": "Coffee beans",
+          "amount": -25
         }
       ]
     }
