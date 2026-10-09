@@ -54,7 +54,7 @@
 
 .c-sidebar__link[aria-current="page"] {
   background-color: var(--color-bg-alt);
-  color: var(--color-primary);
+  color: var(--color-primary-text);
   font-weight: 600;
 }
 
