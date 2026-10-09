@@ -22,6 +22,20 @@ Append `?fail=1` to the URL to see the error states.
 
 ---
 
+## 📊 Lighthouse
+
+Measured on the live demo, light and dark themes.
+
+| Profile | Performance | Accessibility | Best Practices | SEO |
+| :------ | :---------: | :-----------: | :------------: | :-: |
+| Mobile  |     98+     |      100      |      100       | 100 |
+| Desktop |     100     |      100      |      100       | 100 |
+
+- **No layout shift (CLS 0):** skeletons reserve the final size of every widget.
+- **WCAG AA contrast** in both themes: text colors are separate tokens with a verified 4.5:1 ratio.
+
+---
+
 ## ⚙️ Tech Stack
 
 | Area           | Tools                                                                        |
