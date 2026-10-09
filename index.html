@@ -78,7 +78,6 @@
                 class="c-header__button c-sidebar__theme"
                 type="button"
                 data-theme-toggle
-                aria-label="Toggle theme"
               >
                 Theme
               </button>
@@ -171,7 +170,6 @@
                 class="c-header__button c-header__button--theme"
                 type="button"
                 data-theme-toggle
-                aria-label="Toggle theme"
               >
                 Theme
               </button>
@@ -480,12 +478,11 @@
                     <table class="c-table" aria-label="Latest transactions">
                       <thead class="c-table__head">
                         <tr>
-                          <th scope="col">
+                          <th scope="col" aria-sort="none">
                             <button
                               class="c-table__sort"
                               type="button"
                               data-sort-key="date"
-                              aria-sort="none"
                             >
                               Date
                               <span
@@ -497,12 +494,11 @@
                           </th>
                           <th scope="col">Category</th>
                           <th scope="col">Description</th>
-                          <th scope="col">
+                          <th scope="col" aria-sort="none">
                             <button
                               class="c-table__sort"
                               type="button"
                               data-sort-key="amount"
-                              aria-sort="none"
                             >
                               Amount
                               <span

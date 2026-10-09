@@ -263,16 +263,18 @@ export default function initTable() {
     sortButtons.forEach((button) => {
       const key = button.dataset.sortKey;
       if (key === state.sortKey) {
-        button.setAttribute(
-          "aria-sort",
-          state.sortDirection === "asc" ? "ascending" : "descending",
-        );
+        button
+          .closest("th")
+          ?.setAttribute(
+            "aria-sort",
+            state.sortDirection === "asc" ? "ascending" : "descending",
+          );
         const indicator = button.querySelector(".c-table__sort-indicator");
         if (indicator) {
           indicator.textContent = state.sortDirection === "asc" ? "↑" : "↓";
         }
       } else {
-        button.setAttribute("aria-sort", "none");
+        button.closest("th")?.setAttribute("aria-sort", "none");
         const indicator = button.querySelector(".c-table__sort-indicator");
         if (indicator) {
           indicator.textContent = "↕";
