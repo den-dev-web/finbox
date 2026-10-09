@@ -1,0 +1,24 @@
+.c-settings {
+  display: grid;
+  gap: var(--space-md);
+  max-width: 640px;
+}
+
+.c-settings__fields {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.c-settings__footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.c-settings__status {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}

@@ -68,3 +68,64 @@ test("system theme follows the OS scheme live", async ({ page }) => {
   await page.emulateMedia({ colorScheme: "light" });
   await expect(html).toHaveAttribute("data-theme", "light");
 });
+
+test.describe("settings page", () => {
+  test("shows stored values", async ({ page }) => {
+    await storeSettings(page, { theme: "dark", currency: "UAH" });
+    await page.goto(PAGES.settings);
+    await expect(page.getByLabel("Dark")).toBeChecked();
+    await expect(page.getByLabel("Currency")).toHaveValue("UAH");
+    await expect(page.getByLabel("Default period")).toHaveValue("month");
+    await expect(page.getByText("1 USD = 0.92 EUR = 41.5 UAH")).toBeVisible();
+  });
+
+  test("saves on change and other pages use it", async ({ page }) => {
+    await page.goto(PAGES.settings);
+    await page.getByLabel("Currency").selectOption("EUR");
+    await expect(page.locator("[data-settings-status]")).toHaveText(
+      "Saved. Other pages use the new settings when you open them.",
+    );
+    await page.getByRole("link", { name: "Dashboard" }).click();
+    await waitForData(page);
+    await expect(
+      page.locator('[data-metric="income"] [data-metric-value]'),
+    ).toHaveText("€222,456");
+  });
+
+  test("theme applies at once and persists", async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "light" });
+    await page.goto(PAGES.settings);
+    const html = page.locator("html");
+    await page.getByLabel("Dark").check();
+    await expect(html).toHaveAttribute("data-theme", "dark");
+    await page.reload();
+    await expect(html).toHaveAttribute("data-theme", "dark");
+    await expect(page.getByLabel("Dark")).toBeChecked();
+  });
+
+  test("reset restores the defaults", async ({ page }) => {
+    await storeSettings(page, { currency: "EUR", density: "compact" });
+    await page.goto(PAGES.settings);
+    await page.getByRole("button", { name: "Reset to defaults" }).click();
+    await expect(page.getByLabel("Currency")).toHaveValue("USD");
+    await expect(page.getByLabel("Comfortable")).toBeChecked();
+    await expect(page.locator("[data-settings-status]")).toHaveText(
+      "Defaults restored.",
+    );
+  });
+
+  test("explains when storage is blocked", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(window, "localStorage", {
+        get() {
+          throw new DOMException("The operation is insecure.", "SecurityError");
+        },
+      });
+    });
+    await page.goto(PAGES.settings);
+    await page.getByLabel("Compact").check();
+    await expect(page.locator("[data-settings-status]")).toHaveText(
+      "Your browser blocks storage, so settings apply to this page only.",
+    );
+  });
+});

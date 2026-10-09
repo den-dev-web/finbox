@@ -13,6 +13,7 @@
 @import url("./components/form.css");
 @import url("./components/accounts.css");
 @import url("./components/dialog.css");
+@import url("./components/settings.css");
 @import url("./utilities/motion.css");
 
 /* Objects, components, utilities will be layered here next. */

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <!-- @include head-common -->
+    <title>FinBox — Settings</title>
+    <meta
+      name="description"
+      content="FinBox settings: theme, currency, default period and table density."
+    />
+    <link
+      rel="canonical"
+      href="https://den-dev-web.github.io/finbox/settings/"
+    />
+    <meta property="og:title" content="FinBox — Settings" />
+    <meta
+      property="og:description"
+      content="FinBox settings: theme, currency, default period and table density."
+    />
+    <meta
+      property="og:url"
+      content="https://den-dev-web.github.io/finbox/settings/"
+    />
+  </head>
+  <body>
+    <div class="o-shell">
+      <!-- @include sidebar -->
+
+      <div
+        class="c-sidebar__overlay"
+        aria-hidden="true"
+        data-sidebar-overlay
+      ></div>
+
+      <div class="o-content">
+        <!-- @block header title="Settings" -->
+        <!-- @endblock -->
+
+        <main class="o-main">
+          <div class="o-container">
+            <form class="c-settings" data-settings-form>
+              <section class="c-card u-reveal">
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Appearance</h2>
+                </div>
+                <div class="c-settings__fields">
+                  <fieldset class="c-fieldset" aria-describedby="theme-hint">
+                    <legend class="c-fieldset__legend">Theme</legend>
+                    <div class="c-choice-group">
+                      <label class="c-choice">
+                        <input type="radio" name="theme" value="system" />
+                        System
+                      </label>
+                      <label class="c-choice">
+                        <input type="radio" name="theme" value="light" />
+                        Light
+                      </label>
+                      <label class="c-choice">
+                        <input type="radio" name="theme" value="dark" />
+                        Dark
+                      </label>
+                    </div>
+                    <p class="c-field__hint" id="theme-hint">
+                      System follows your device’s light or dark mode.
+                    </p>
+                  </fieldset>
+                  <fieldset class="c-fieldset">
+                    <legend class="c-fieldset__legend">Table density</legend>
+                    <div class="c-choice-group">
+                      <label class="c-choice">
+                        <input
+                          type="radio"
+                          name="density"
+                          value="comfortable"
+                        />
+                        Comfortable
+                      </label>
+                      <label class="c-choice">
+                        <input type="radio" name="density" value="compact" />
+                        Compact
+                      </label>
+                    </div>
+                  </fieldset>
+                </div>
+              </section>
+              <section class="c-card u-reveal">
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Region</h2>
+                </div>
+                <div class="c-settings__fields">
+                  <div class="c-field">
+                    <label class="c-field__label" for="settings-currency"
+                      >Currency</label
+                    >
+                    <select
+                      class="c-field__input"
+                      id="settings-currency"
+                      name="currency"
+                      aria-describedby="settings-currency-hint"
+                    >
+                      <option value="USD">USD — US dollar</option>
+                      <option value="EUR">EUR — Euro</option>
+                      <option value="UAH">UAH — Ukrainian hryvnia</option>
+                    </select>
+                    <p
+                      class="c-field__hint"
+                      id="settings-currency-hint"
+                      data-settings-rates
+                    >
+                      Amounts convert with fixed demo rates.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <section class="c-card u-reveal">
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Dashboard</h2>
+                </div>
+                <div class="c-settings__fields">
+                  <div class="c-field">
+                    <label class="c-field__label" for="settings-defaultPeriod"
+                      >Default period</label
+                    >
+                    <select
+                      class="c-field__input"
+                      id="settings-defaultPeriod"
+                      name="defaultPeriod"
+                      aria-describedby="settings-period-hint"
+                    >
+                      <option value="day">Day</option>
+                      <option value="week">Week</option>
+                      <option value="month">Month</option>
+                      <option value="year">Year</option>
+                    </select>
+                    <p class="c-field__hint" id="settings-period-hint">
+                      The period the dashboard opens with.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              <div class="c-settings__footer">
+                <p
+                  class="c-settings__status"
+                  aria-live="polite"
+                  data-settings-status
+                ></p>
+                <button
+                  class="c-header__button"
+                  type="button"
+                  data-settings-reset
+                >
+                  Reset to defaults
+                </button>
+              </div>
+            </form>
+          </div>
+        </main>
+        <footer class="o-footer">
+          <div class="o-container">
+            <small>FinBox © 2026</small>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="/src/js/pages/settings.js"></script>
+  </body>
+</html>

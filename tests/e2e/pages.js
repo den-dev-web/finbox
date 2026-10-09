@@ -3,6 +3,7 @@ export const PAGES = {
   dashboard: "./",
   reports: "./reports/",
   accounts: "./accounts/",
+  settings: "./settings/",
 };
 
 export const THEMES = ["light", "dark"];

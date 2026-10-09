@@ -9,6 +9,7 @@ const PAGES = {
   dashboard: "index.html",
   reports: "reports/index.html",
   accounts: "accounts/index.html",
+  settings: "settings/index.html",
 };
 
 const INCLUDE_PATTERN = /<!-- @include ([\w-]+) -->/g;
