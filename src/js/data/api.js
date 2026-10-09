@@ -13,6 +13,7 @@ const shouldFail = () =>
 /** @typedef {import("../types").Period} Period */
 /** @typedef {import("../types").DashboardData} DashboardData */
 /** @typedef {import("../types").ReportsData} ReportsData */
+/** @typedef {import("../types").AccountsData} AccountsData */
 
 /**
  * Fetches a mock JSON file with simulated latency, like a real API call.
@@ -65,3 +66,9 @@ export async function getDashboard(period) {
  * @returns {Promise<ReportsData>}
  */
 export const getReports = () => loadMock("reports.mock.json");
+
+/**
+ * Loads the accounts that come with the demo data.
+ * @returns {Promise<AccountsData>}
+ */
+export const getAccounts = () => loadMock("accounts.mock.json");

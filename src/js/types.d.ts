@@ -46,6 +46,22 @@ export interface ReportsData {
   categories: CategoryTotal[];
 }
 
+export type AccountType = "bank" | "savings" | "card" | "investment" | "cash";
+
+export interface Account {
+  id: string;
+  name: string;
+  type: AccountType;
+  /** Bank or broker; empty for cash */
+  institution: string;
+  /** In USD; negative for card debt */
+  balance: number;
+}
+
+export interface AccountsData {
+  accounts: Account[];
+}
+
 export interface DataLoadedDetail {
   period: Period;
   data: DashboardData;

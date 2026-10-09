@@ -1,0 +1,46 @@
+{
+  "accounts": [
+    {
+      "id": "checking-main",
+      "name": "Main checking",
+      "type": "bank",
+      "institution": "Monobank",
+      "balance": 8420.55
+    },
+    {
+      "id": "savings-goal",
+      "name": "Emergency fund",
+      "type": "savings",
+      "institution": "PrivatBank",
+      "balance": 15300
+    },
+    {
+      "id": "card-travel",
+      "name": "Travel card",
+      "type": "card",
+      "institution": "Revolut",
+      "balance": -642.18
+    },
+    {
+      "id": "invest-etf",
+      "name": "ETF portfolio",
+      "type": "investment",
+      "institution": "Interactive Brokers",
+      "balance": 23875.4
+    },
+    {
+      "id": "cash-wallet",
+      "name": "Wallet",
+      "type": "cash",
+      "institution": "",
+      "balance": 180
+    },
+    {
+      "id": "business",
+      "name": "Freelance income",
+      "type": "bank",
+      "institution": "Wise",
+      "balance": 3260.9
+    }
+  ]
+}
