@@ -18,3 +18,10 @@
     transition: none;
   }
 }
+
+/* Cross-document page transitions; browsers without support navigate as usual */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+}

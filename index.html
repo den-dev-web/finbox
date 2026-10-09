@@ -1,90 +1,23 @@
 <!doctype html>
 <html lang="en" data-theme="light">
   <head>
-    <meta charset="UTF-8" />
-    <!-- Apply the saved theme before first paint to avoid a light-to-dark flash -->
-    <script>
-      (() => {
-        let theme = null;
-        try {
-          theme = localStorage.getItem("finbox-theme");
-        } catch {
-          // Storage can be blocked (private mode); fall back to the OS setting
-        }
-        if (theme !== "light" && theme !== "dark") {
-          theme = matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-        }
-        document.documentElement.dataset.theme = theme;
-      })();
-    </script>
-    <link rel="icon" type="image/png" href="/assets/icons/favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- @include head-common -->
     <title>FinBox — Dashboard</title>
     <meta
       name="description"
       content="FinBox — financial analytics dashboard."
     />
     <link rel="canonical" href="https://den-dev-web.github.io/finbox/" />
-    <meta
-      name="theme-color"
-      content="#f6f7fb"
-      media="(prefers-color-scheme: light)"
-    />
-    <meta
-      name="theme-color"
-      content="#0f121a"
-      media="(prefers-color-scheme: dark)"
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="FinBox" />
-    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content="FinBox — Dashboard" />
     <meta
       property="og:description"
       content="FinBox — financial analytics dashboard."
     />
     <meta property="og:url" content="https://den-dev-web.github.io/finbox/" />
-    <meta
-      property="og:image"
-      content="https://den-dev-web.github.io/finbox/og-image.png"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="stylesheet" href="./src/styles/main.css" />
   </head>
   <body>
     <div class="o-shell">
-      <aside class="o-sidebar" id="sidebar" aria-label="Sidebar" data-sidebar>
-        <div class="o-container">
-          <div class="c-sidebar">
-            <p class="c-sidebar__logo">FinBox</p>
-            <nav aria-label="Primary">
-              <ul class="c-sidebar__nav">
-                <li>
-                  <a class="c-sidebar__link" href="#" aria-current="page"
-                    >Dashboard</a
-                  >
-                </li>
-                <li><a class="c-sidebar__link" href="#">Reports</a></li>
-                <li><a class="c-sidebar__link" href="#">Accounts</a></li>
-                <li><a class="c-sidebar__link" href="#">Settings</a></li>
-              </ul>
-            </nav>
-            <div class="c-sidebar__actions">
-              <button
-                class="c-header__button c-sidebar__theme"
-                type="button"
-                data-theme-toggle
-              >
-                Theme
-              </button>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <!-- @include sidebar -->
 
       <div
         class="c-sidebar__overlay"
@@ -610,6 +543,6 @@
         </footer>
       </div>
     </div>
-    <script type="module" src="./src/js/main.js"></script>
+    <script type="module" src="/src/js/main.js"></script>
   </body>
 </html>
