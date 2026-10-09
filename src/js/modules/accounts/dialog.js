@@ -7,9 +7,6 @@ import { createAccount, validateAccount } from "./model.js";
 /** @type {(keyof AccountForm)[]} */
 const FIELDS = ["name", "type", "institution", "balance"];
 
-// <dialog>.showModal() arrived in Safari 15.4; older versions get a plain overlay
-const supportsModal = () => "showModal" in document.createElement("dialog");
-
 // Unique enough for ids that live in one browser's storage
 const newId = () =>
   `user-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
@@ -65,32 +62,16 @@ export default function initAccountDialog(onAdd) {
     if (currency) {
       currency.textContent = displayCurrency();
     }
-    if (supportsModal()) {
-      dialog.showModal();
-    } else {
-      dialog.setAttribute("open", "");
-      input("name").focus();
-    }
+    dialog.showModal();
   };
 
   const close = () => {
-    if (supportsModal()) {
-      dialog.close();
-    } else {
-      dialog.removeAttribute("open");
-    }
+    dialog.close();
     openButton.focus();
   };
 
   openButton.addEventListener("click", open);
   form.querySelector("[data-account-cancel]")?.addEventListener("click", close);
-
-  // Native modals close on Escape by themselves; the fallback needs it too
-  dialog.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && !supportsModal()) {
-      close();
-    }
-  });
 
   // Once a field shows an error, re-check it while the user corrects it
   form.addEventListener("input", (event) => {

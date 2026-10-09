@@ -1,7 +1,4 @@
-/*
- * Native <dialog>. Closed and open states are explicit so the same styles work
- * in browsers without <dialog> support (Safari 15.0–15.3), where JS toggles [open].
- */
+/* Native <dialog> opened with showModal(); closed and open states are explicit */
 .c-dialog:not([open]) {
   display: none;
 }

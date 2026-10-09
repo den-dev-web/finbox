@@ -56,11 +56,9 @@ test("dashboard works when storage is blocked", async ({ page }) => {
   await page.getByRole("button", { name: /^Theme:/ }).click();
 });
 
-test("account form works without native dialog support", async ({ page }) => {
-  // Safari 15.0–15.3 have no HTMLDialogElement.showModal
-  await page.addInitScript(() => {
-    delete HTMLDialogElement.prototype.showModal;
-  });
+test("account dialog closes with Escape and returns focus", async ({
+  page,
+}) => {
   await page.goto(PAGES.accounts);
   await page.getByRole("button", { name: "Add account" }).click();
   const name = page.getByLabel("Name");
