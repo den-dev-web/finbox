@@ -61,6 +61,7 @@ Measured on the live demo for all four pages.
 | Code quality   | ESLint, Stylelint, Prettier, TypeScript strict `checkJs` (JSDoc types)                 |
 | Testing        | Vitest (unit), Playwright (smoke, axe accessibility, visual regression), html-validate |
 | CI/CD          | GitHub Actions → GitHub Pages                                                          |
+| Browsers       | Last 2 Chrome, Edge, Firefox; Safari and iOS 16.4+                                     |
 
 ---
 
