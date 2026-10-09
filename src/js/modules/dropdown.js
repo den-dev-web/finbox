@@ -1,6 +1,11 @@
 export default function initDropdowns() {
   const dropdowns = document.querySelectorAll("[data-dropdown]");
   const isMobile = () => window.matchMedia("(max-width: 720px)").matches;
+  /**
+   * On mobile, aligns the panel to the side where it fits the viewport.
+   * @param {HTMLElement} panel
+   * @param {HTMLElement} trigger
+   */
   const alignPanel = (panel, trigger) => {
     if (!isMobile()) {
       panel.style.position = "";
@@ -28,9 +33,15 @@ export default function initDropdowns() {
   };
 
   dropdowns.forEach((dropdown) => {
-    const trigger = dropdown.querySelector("[data-dropdown-trigger]");
-    const panel = dropdown.querySelector("[data-dropdown-panel]");
-    const options = [...dropdown.querySelectorAll(".c-dropdown__option")];
+    const trigger = /** @type {HTMLButtonElement | null} */ (
+      dropdown.querySelector("[data-dropdown-trigger]")
+    );
+    const panel = /** @type {HTMLElement | null} */ (
+      dropdown.querySelector("[data-dropdown-panel]")
+    );
+    const options = /** @type {HTMLButtonElement[]} */ ([
+      ...dropdown.querySelectorAll(".c-dropdown__option"),
+    ]);
 
     if (!trigger || !panel || options.length === 0) {
       return;
@@ -51,6 +62,7 @@ export default function initDropdowns() {
       });
     };
 
+    /** @param {number} nextIndex roving tabindex target */
     const setActiveIndex = (nextIndex) => {
       options.forEach((option, index) => {
         option.tabIndex = index === nextIndex ? 0 : -1;
@@ -139,8 +151,10 @@ export default function initDropdowns() {
           item.setAttribute("aria-selected", "false");
         });
         option.setAttribute("aria-selected", "true");
-        const period = option.dataset.value;
-        trigger.textContent = `Period: ${option.textContent.trim()}`;
+        const period = /** @type {import("../types").Period | undefined} */ (
+          option.dataset.value
+        );
+        trigger.textContent = `Period: ${option.textContent?.trim()}`;
         close();
         trigger.focus();
 
@@ -153,7 +167,7 @@ export default function initDropdowns() {
     });
 
     document.addEventListener("click", (event) => {
-      if (!dropdown.contains(event.target)) {
+      if (!dropdown.contains(/** @type {Node | null} */ (event.target))) {
         close();
       }
     });

@@ -7,6 +7,7 @@ export default function initSidebar() {
     return;
   }
 
+  /** @param {boolean} isOpen */
   const setOpen = (isOpen) => {
     sidebar.classList.toggle("is-open", isOpen);
     overlay.classList.toggle("is-open", isOpen);
