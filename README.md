@@ -25,7 +25,7 @@ A financial analytics dashboard built with vanilla JavaScript, modern CSS and no
 - **Loading, error and empty states** for every widget; skeletons keep the layout still
 - **Accessible forms and widgets** — labelled fields with inline errors, focus management in the dialog, listbox keyboard pattern, WCAG AA contrast
 - **Page transitions** — cross-document View Transitions where supported, plain navigation elsewhere
-- **Resilient** — works with blocked storage (private modes) and in Safari 15 without `<dialog>` support
+- **Resilient** — works with blocked storage (private modes)
 
 Append `?fail=1` to the URL to see the error states.
 
@@ -67,9 +67,11 @@ Measured on the live demo for all four pages.
 
 ## 🧩 Architecture
 
-**CSS — ITCSS layers with namespaced BEM.** Styles go from generic to specific: `settings` (design tokens) → `generic` (reset) → `elements` → `objects` (`o-` layout) → `components` (`c-`) → `utilities` (`u-`). States use `is-` classes and `data-state` attributes. Stylelint enforces the naming.
+**CSS — ITCSS layers with namespaced BEM.** Styles go from generic to specific: `settings` (design tokens) → `generic` (reset) → `elements` → `objects` (`o-` layout) → `components` (`c-`) → `utilities` (`u-`). Each group is a cascade layer (`@layer`), so a later layer wins regardless of selector specificity. States use `is-` classes and `data-state` attributes. Stylelint enforces the naming.
 
-**Design tokens.** Colors, spacing, radii, shadows and motion are CSS custom properties. The dark theme works by redefining tokens under `[data-theme="dark"]`.
+**Design tokens.** Colors, spacing, radii, shadows and motion are CSS custom properties. Colors are `oklch()` values; tints derive from them with `color-mix()`, and chart series use a `--color-chart-1…5` palette. The dark theme works by redefining tokens under `[data-theme="dark"]`.
+
+**Responsive components.** Chart cards are size containers: their inner layout follows the card width through container queries, not the viewport, so a chart fits a narrow grid column as well as a phone screen. Page-level media queries use range syntax (`width < 1024px`).
 
 **Multi-page build with shared markup.** Vite builds one HTML page per section with clean URLs. A small plugin in `vite.config.js` inlines shared partials (head, sidebar, header with a title parameter and an actions slot) and marks the current page in the navigation; a missing parameter fails the build.
 
