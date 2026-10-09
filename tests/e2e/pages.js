@@ -10,7 +10,7 @@ export const THEMES = ["light", "dark"];
 // Theme is stored before the page loads, so the inline head script applies it on first paint
 export async function setTheme(page, theme) {
   await page.addInitScript((value) => {
-    localStorage.setItem("finbox-theme", value);
+    localStorage.setItem("finbox-settings", JSON.stringify({ theme: value }));
   }, theme);
 }
 

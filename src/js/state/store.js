@@ -1,4 +1,5 @@
 import { getDashboard } from "../data/api.js";
+import { getSettings } from "./settings.js";
 
 /** @typedef {import("../types").Period} Period */
 /** @typedef {import("../types").DashboardData} DashboardData */
@@ -50,6 +51,7 @@ const load = async () => {
 };
 
 export default function initStore() {
+  state.period = getSettings().defaultPeriod;
   document.addEventListener("period:change", (event) => {
     if (event.detail?.period) {
       state.period = event.detail.period;

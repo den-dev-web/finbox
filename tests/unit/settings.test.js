@@ -3,6 +3,7 @@ import {
   DEFAULT_SETTINGS,
   SETTINGS_KEY,
   getSettings,
+  saveSettings,
 } from "../../src/js/state/settings.js";
 import { storage } from "../../src/js/utils/storage.js";
 
@@ -20,14 +21,30 @@ afterEach(() => {
 });
 
 describe("getSettings", () => {
-  it("returns stored values", () => {
-    stubStorage({ [SETTINGS_KEY]: JSON.stringify({ currency: "EUR" }) });
-    expect(getSettings()).toEqual({ currency: "EUR" });
+  it("returns stored values over the defaults", () => {
+    stubStorage({
+      [SETTINGS_KEY]: JSON.stringify({ currency: "EUR", density: "compact" }),
+    });
+    expect(getSettings()).toEqual({
+      ...DEFAULT_SETTINGS,
+      currency: "EUR",
+      density: "compact",
+    });
   });
 
-  it("falls back to defaults for unknown values", () => {
-    stubStorage({ [SETTINGS_KEY]: JSON.stringify({ currency: "BTC" }) });
-    expect(getSettings()).toEqual(DEFAULT_SETTINGS);
+  it("falls back per field for unknown values", () => {
+    stubStorage({
+      [SETTINGS_KEY]: JSON.stringify({
+        theme: "sepia",
+        currency: "BTC",
+        defaultPeriod: "week",
+        extra: true,
+      }),
+    });
+    expect(getSettings()).toEqual({
+      ...DEFAULT_SETTINGS,
+      defaultPeriod: "week",
+    });
   });
 
   it("falls back to defaults for corrupted JSON", () => {
@@ -60,5 +77,18 @@ describe("storage.set", () => {
       },
     });
     expect(storage.set("key", 1)).toBe(false);
+  });
+});
+
+describe("saveSettings", () => {
+  it("merges changes into the current settings", () => {
+    const items = { [SETTINGS_KEY]: JSON.stringify({ currency: "UAH" }) };
+    stubStorage(items);
+    expect(saveSettings({ theme: "dark" })).toBe(true);
+    expect(JSON.parse(items[SETTINGS_KEY])).toEqual({
+      ...DEFAULT_SETTINGS,
+      currency: "UAH",
+      theme: "dark",
+    });
   });
 });

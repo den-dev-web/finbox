@@ -1,34 +1,16 @@
-const THEME_KEY = "finbox-theme";
+import { getSettings, saveSettings } from "../state/settings.js";
 
 /** @typedef {"light" | "dark"} Theme */
 
-// Storage access throws in some private modes; the theme then follows the OS
-const readStoredTheme = () => {
-  try {
-    return localStorage.getItem(THEME_KEY);
-  } catch {
-    return null;
-  }
-};
-
-/** @param {Theme} theme */
-const storeTheme = (theme) => {
-  try {
-    localStorage.setItem(THEME_KEY, theme);
-  } catch {
-    // The choice still applies for this visit, it is just not remembered
-  }
-};
+const darkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
 /** @returns {Theme} */
-const getPreferredTheme = () => {
-  const stored = readStoredTheme();
-  if (stored === "light" || stored === "dark") {
-    return stored;
+const resolveTheme = () => {
+  const { theme } = getSettings();
+  if (theme === "system") {
+    return darkScheme.matches ? "dark" : "light";
   }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  return theme;
 };
 
 /** @param {Theme} theme */
@@ -38,9 +20,6 @@ const applyTheme = (theme) => {
 
 export default function initThemeToggle() {
   const buttons = [...document.querySelectorAll("[data-theme-toggle]")];
-  if (!buttons.length) {
-    return;
-  }
 
   /** @param {Theme} theme */
   const updateLabel = (theme) => {
@@ -50,16 +29,36 @@ export default function initThemeToggle() {
     });
   };
 
-  let currentTheme = getPreferredTheme();
-  applyTheme(currentTheme);
-  updateLabel(currentTheme);
+  // Kept in memory so toggling works even when storage is blocked
+  let current = resolveTheme();
+
+  /** @param {Theme} theme */
+  const show = (theme) => {
+    current = theme;
+    applyTheme(theme);
+    updateLabel(theme);
+  };
+
+  const refresh = () => show(resolveTheme());
+
+  refresh();
+
+  // "System" follows the OS live, e.g. automatic dark mode at sunset
+  darkScheme.addEventListener("change", () => {
+    if (getSettings().theme === "system") {
+      refresh();
+    }
+  });
+
+  // The Settings page announces saved changes
+  document.addEventListener("settings:change", refresh);
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
-      currentTheme = currentTheme === "dark" ? "light" : "dark";
-      applyTheme(currentTheme);
-      storeTheme(currentTheme);
-      updateLabel(currentTheme);
+      const next = current === "dark" ? "light" : "dark";
+      // Without storage the choice still applies for this visit
+      saveSettings({ theme: next });
+      show(next);
     });
   });
 }

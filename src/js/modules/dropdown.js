@@ -145,16 +145,30 @@ export default function initDropdowns() {
       }
     });
 
+    /** @param {HTMLButtonElement} option */
+    const markSelected = (option) => {
+      options.forEach((item) => {
+        item.setAttribute("aria-selected", String(item === option));
+      });
+      trigger.textContent = `Period: ${option.textContent?.trim()}`;
+    };
+
+    // Show whatever period the store loads, including the default from settings
+    document.addEventListener("data:loading", (event) => {
+      const option = options.find(
+        (item) => item.dataset.value === event.detail.period,
+      );
+      if (option) {
+        markSelected(option);
+      }
+    });
+
     options.forEach((option) => {
       option.addEventListener("click", () => {
-        options.forEach((item) => {
-          item.setAttribute("aria-selected", "false");
-        });
-        option.setAttribute("aria-selected", "true");
+        markSelected(option);
         const period = /** @type {import("../types").Period | undefined} */ (
           option.dataset.value
         );
-        trigger.textContent = `Period: ${option.textContent?.trim()}`;
         close();
         trigger.focus();
 

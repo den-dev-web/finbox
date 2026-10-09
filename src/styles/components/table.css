@@ -518,3 +518,12 @@
     flex-wrap: wrap;
   }
 }
+
+/* Compact density from Settings: tighter rows, same columns */
+html[data-density="compact"] .c-table td {
+  padding-block: 0.4rem;
+}
+
+html[data-density="compact"] .c-table__card {
+  padding-block: 0.5rem;
+}

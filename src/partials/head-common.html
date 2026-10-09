@@ -1,19 +1,26 @@
 <meta charset="UTF-8" />
-<!-- Apply the saved theme before first paint to avoid a light-to-dark flash -->
+<!--
+  Apply saved settings before first paint: no light-to-dark flash and no layout
+  shift from table density. Key and values match src/js/state/settings.js.
+-->
 <script>
   (() => {
-    let theme = null;
+    let settings = {};
     try {
-      theme = localStorage.getItem("finbox-theme");
+      settings = JSON.parse(localStorage.getItem("finbox-settings")) || {};
     } catch {
-      // Storage can be blocked (private mode); fall back to the OS setting
+      // Storage can be blocked (private mode) or hold invalid JSON
     }
+    let theme = settings.theme;
     if (theme !== "light" && theme !== "dark") {
       theme = matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     }
     document.documentElement.dataset.theme = theme;
+    if (settings.density === "compact") {
+      document.documentElement.dataset.density = "compact";
+    }
   })();
 </script>
 <!--

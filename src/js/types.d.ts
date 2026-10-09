@@ -86,5 +86,7 @@ declare global {
     "data:loading": CustomEvent<PeriodChangeDetail>;
     /** A widget asks the store to reload the current period */
     "data:retry": CustomEvent<null>;
+    /** Settings were saved on the Settings page */
+    "settings:change": CustomEvent<null>;
   }
 }
