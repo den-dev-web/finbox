@@ -1,6 +1,15 @@
 // DOM builders for table rows, mobile cards and filter menus.
 import { formatCurrency, formatDate } from "./model.js";
 
+/** @typedef {import("../../types").Transaction} Transaction */
+
+/**
+ * @template {keyof HTMLElementTagNameMap} K
+ * @param {K} tag
+ * @param {string} [className]
+ * @param {string} [text]
+ * @returns {HTMLElementTagNameMap[K]}
+ */
 const createElement = (tag, className, text) => {
   const element = document.createElement(tag);
   if (className) {
@@ -12,6 +21,11 @@ const createElement = (tag, className, text) => {
   return element;
 };
 
+/**
+ * @param {string} className
+ * @param {string} text
+ * @param {Record<string, string>} [attributes]
+ */
 const createButton = (className, text, attributes = {}) => {
   const button = document.createElement("button");
   button.type = "button";
@@ -23,6 +37,10 @@ const createButton = (className, text, attributes = {}) => {
   return button;
 };
 
+/**
+ * @param {"td" | "span"} tag
+ * @param {number} amount
+ */
 const createAmount = (tag, amount) =>
   createElement(
     tag,
@@ -33,6 +51,10 @@ const createAmount = (tag, amount) =>
   );
 
 // "⋮" toggle with an Edit / Delete menu; returns both so callers place them
+/**
+ * @param {string} menuId
+ * @returns {[HTMLButtonElement, HTMLDivElement]}
+ */
 const createActionMenu = (menuId) => {
   const toggle = createButton("c-table__action-toggle", "⋮", {
     "aria-haspopup": "menu",
@@ -60,6 +82,10 @@ const createActionMenu = (menuId) => {
   return [toggle, menu];
 };
 
+/**
+ * @param {Transaction} row
+ * @param {number} index position on the page, used for unique menu ids
+ */
 export const createRow = (row, index) => {
   const tr = document.createElement("tr");
   const actionCell = createElement("td", "c-table__actions");
@@ -76,6 +102,10 @@ export const createRow = (row, index) => {
 };
 
 // Mobile layout: the same row as a card
+/**
+ * @param {Transaction} row
+ * @param {number} index position on the page, used for unique menu ids
+ */
 export const createCard = (row, index) => {
   const meta = createElement("div", "c-table__card-meta");
   meta.append(
@@ -105,6 +135,11 @@ export const createCard = (row, index) => {
 };
 
 // Filter chip with a listbox of values; the empty value means "All"
+/**
+ * @param {string} field
+ * @param {string} label
+ * @param {string[]} values
+ */
 export const createFilter = (field, label, values) => {
   const trigger = createButton("c-table__filter-chip", `${label}: All`, {
     "data-filter-trigger": field,

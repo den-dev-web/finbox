@@ -10,30 +10,79 @@ import {
 } from "./table/model.js";
 import { createCard, createFilter, createRow } from "./table/render.js";
 
+/** @typedef {import("../types").Period} Period */
+/** @typedef {import("../types").Transaction} Transaction */
+/** @typedef {import("./table/model.js").FilterField} FilterField */
+/** @typedef {import("./table/model.js").Filters} Filters */
+/** @typedef {import("./table/model.js").SortKey} SortKey */
+/** @typedef {import("./table/model.js").SortDirection} SortDirection */
+
 export default function initTable() {
-  const card = document.querySelector("[data-table-card]");
+  const card = /** @type {HTMLElement | null} */ (
+    document.querySelector("[data-table-card]")
+  );
   if (!card) {
     return;
   }
 
-  const body = card.querySelector("[data-table-body]");
-  const cards = card.querySelector("[data-table-cards]");
-  const emptyCards = card.querySelector("[data-table-empty-card]");
-  const emptyState = card.querySelector("[data-table-empty]");
-  const head = card.querySelector(".c-table__head");
-  const sortButtons = [...card.querySelectorAll("[data-sort-key]")];
-  const retryButton = card.querySelector(".c-table__retry");
-  const filtersContainer = card.querySelector("[data-table-filters]");
-  const resetFiltersButton = card.querySelector("[data-table-filter-reset]");
-  const pagination = card.querySelector("[data-table-pagination]");
-  const pageInfo = card.querySelector("[data-page-info]");
-  const pageSummary = card.querySelector("[data-page-summary]");
-  const pagePrev = card.querySelector("[data-page-prev]");
-  const pageNext = card.querySelector("[data-page-next]");
-  const pageFirst = card.querySelector("[data-page-first]");
-  const pageLast = card.querySelector("[data-page-last]");
-  const pageSizeSelect = card.querySelector("[data-page-size]");
+  const body = /** @type {HTMLTableSectionElement | null} */ (
+    card.querySelector("[data-table-body]")
+  );
+  const cards = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-table-cards]")
+  );
+  const emptyCards = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-table-empty-card]")
+  );
+  const emptyState = /** @type {HTMLTableSectionElement | null} */ (
+    card.querySelector("[data-table-empty]")
+  );
+  const head = /** @type {HTMLElement | null} */ (
+    card.querySelector(".c-table__head")
+  );
+  const sortButtons = /** @type {HTMLButtonElement[]} */ ([
+    ...card.querySelectorAll("[data-sort-key]"),
+  ]);
+  const retryButton = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector(".c-table__retry")
+  );
+  const filtersContainer = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-table-filters]")
+  );
+  const resetFiltersButton = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector("[data-table-filter-reset]")
+  );
+  const pagination = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-table-pagination]")
+  );
+  const pageInfo = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-page-info]")
+  );
+  const pageSummary = /** @type {HTMLElement | null} */ (
+    card.querySelector("[data-page-summary]")
+  );
+  const pagePrev = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector("[data-page-prev]")
+  );
+  const pageNext = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector("[data-page-next]")
+  );
+  const pageFirst = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector("[data-page-first]")
+  );
+  const pageLast = /** @type {HTMLButtonElement | null} */ (
+    card.querySelector("[data-page-last]")
+  );
+  const pageSizeSelect = /** @type {HTMLSelectElement | null} */ (
+    card.querySelector("[data-page-size]")
+  );
 
+  /**
+   * @type {{
+   *   period: Period, sortKey: SortKey, sortDirection: SortDirection,
+   *   rows: Transaction[], page: number, pageSize: number, filters: Filters
+   * }}
+   */
   const state = {
     period: "month",
     sortKey: "date",
@@ -49,6 +98,7 @@ export default function initTable() {
     },
   };
 
+  /** @type {Record<FilterField, string>} */
   const fieldLabels = {
     date: "Date",
     category: "Category",
@@ -57,6 +107,12 @@ export default function initTable() {
   };
 
   const isMobile = () => window.matchMedia("(max-width: 720px)").matches;
+  /**
+   * On mobile, flips a dropdown menu to the side where it fits the viewport.
+   * @param {HTMLElement} menu
+   * @param {HTMLElement} trigger
+   * @param {boolean} [preferRight]
+   */
   const alignMenu = (menu, trigger, preferRight = false) => {
     if (!isMobile()) {
       menu.style.position = "";
@@ -85,6 +141,7 @@ export default function initTable() {
     menu.style.right = alignRight ? "0" : "auto";
   };
 
+  /** @param {Transaction[]} rows */
   const renderFilters = (rows) => {
     if (!filtersContainer) {
       return;
@@ -108,7 +165,9 @@ export default function initTable() {
       ...filtersContainer.querySelectorAll("[data-filter-trigger]"),
     ];
     triggers.forEach((trigger) => {
-      const field = trigger.getAttribute("data-filter-trigger");
+      const field = /** @type {FilterField | null} */ (
+        trigger.getAttribute("data-filter-trigger")
+      );
       if (!field) {
         return;
       }
@@ -121,7 +180,9 @@ export default function initTable() {
       ...filtersContainer.querySelectorAll("[data-filter-option]"),
     ];
     options.forEach((option) => {
-      const field = option.getAttribute("data-filter-option");
+      const field = /** @type {FilterField | null} */ (
+        option.getAttribute("data-filter-option")
+      );
       const value = option.getAttribute("data-filter-value") || "";
       if (!field) {
         return;
@@ -138,7 +199,7 @@ export default function initTable() {
   };
 
   const clearFilters = () => {
-    Object.keys(state.filters).forEach((field) => {
+    FILTER_FIELDS.forEach((field) => {
       state.filters[field] = null;
     });
     updateFilterUI();
@@ -272,11 +333,14 @@ export default function initTable() {
 
   if (head) {
     head.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-sort-key]");
+      const target = /** @type {Element} */ (event.target);
+      const button = /** @type {HTMLElement | null} */ (
+        target.closest("[data-sort-key]")
+      );
       if (!button) {
         return;
       }
-      const key = button.dataset.sortKey;
+      const key = /** @type {SortKey | undefined} */ (button.dataset.sortKey);
       if (!key) {
         return;
       }
@@ -288,15 +352,18 @@ export default function initTable() {
   }
 
   card.addEventListener("click", (event) => {
-    const filterTrigger = event.target.closest("[data-filter-trigger]");
+    const target = /** @type {Element} */ (event.target);
+    const filterTrigger = /** @type {HTMLElement | null} */ (
+      target.closest("[data-filter-trigger]")
+    );
     if (filterTrigger && filtersContainer?.contains(filterTrigger)) {
       event.preventDefault();
       const field = filterTrigger.getAttribute("data-filter-trigger");
       if (!field) {
         return;
       }
-      const menu = filtersContainer.querySelector(
-        `[data-filter-menu="${field}"]`,
+      const menu = /** @type {HTMLElement | null} */ (
+        filtersContainer.querySelector(`[data-filter-menu="${field}"]`)
       );
       if (!menu) {
         return;
@@ -315,10 +382,12 @@ export default function initTable() {
       return;
     }
 
-    const filterOption = event.target.closest("[data-filter-option]");
+    const filterOption = target.closest("[data-filter-option]");
     if (filterOption && filtersContainer?.contains(filterOption)) {
       event.preventDefault();
-      const field = filterOption.getAttribute("data-filter-option");
+      const field = /** @type {FilterField | null} */ (
+        filterOption.getAttribute("data-filter-option")
+      );
       const value = filterOption.getAttribute("data-filter-value") || "";
       if (!field) {
         return;
@@ -331,11 +400,15 @@ export default function initTable() {
       return;
     }
 
-    const toggle = event.target.closest("[data-action-toggle]");
+    const toggle = /** @type {HTMLElement | null} */ (
+      target.closest("[data-action-toggle]")
+    );
     if (toggle) {
       event.preventDefault();
       const menuId = toggle.getAttribute("aria-controls");
-      const menu = menuId ? card.querySelector(`#${menuId}`) : null;
+      const menu = /** @type {HTMLElement | null} */ (
+        menuId ? card.querySelector(`#${menuId}`) : null
+      );
       if (!menu) {
         return;
       }
@@ -353,7 +426,7 @@ export default function initTable() {
       return;
     }
 
-    if (event.target.closest("[data-action-item]")) {
+    if (target.closest("[data-action-item]")) {
       closeActionMenus();
     }
   });
@@ -409,7 +482,7 @@ export default function initTable() {
   }
 
   document.addEventListener("click", (event) => {
-    if (!card.contains(event.target)) {
+    if (!card.contains(/** @type {Node | null} */ (event.target))) {
       closeActionMenus();
       closeFilterMenus();
       return;
