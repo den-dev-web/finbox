@@ -1,99 +1,71 @@
 # FinBox
 
-FinBox is a frontend dashboard project for financial analytics, focused on clean UI architecture, data visualization patterns, and performance-aware implementation.
+A financial analytics dashboard built with vanilla JavaScript, modern CSS and no runtime dependencies.
 
-🔗 Live demo: https://den-dev-web.github.io/finbox/
+🔗 **Live demo:** https://den-dev-web.github.io/finbox/
+
+![FinBox dashboard](public/og-image.png)
 
 ---
 
-## 📌 About the Project
+## ✨ Features
 
-FinBox represents a financial analytics dashboard with structured layouts, reusable UI components, and interactive data presentation.  
-The project demonstrates how a **data-driven interface** can be built with a strong emphasis on layout systems, accessibility, and maintainable frontend architecture.
+- **Metrics, trends and spending split** for day / week / month / year periods
+- **SVG charts drawn from scratch** — line and doughnut charts without a chart library
+- **Transactions table** with sorting, per-column filters and pagination
+- **Light and dark themes** — follows the OS setting, remembers the user's choice, no flash on load
+- **Loading and error states** for every widget, plus an empty state for the filtered table
+- **Keyboard support** — dropdowns use the listbox pattern (arrows, Home/End, Enter, Escape)
+- **Reduced motion** — animations are skipped when the OS asks for it
+
+Append `?fail=1` to the URL to see the error states.
 
 ---
 
 ## ⚙️ Tech Stack
 
-### Core
-
-- **HTML5** — semantic markup
-- **CSS3** — modern layout techniques and component styling
-- **JavaScript (ES6+)** — application logic and interactivity
-
-### Tooling
-
-- **Vite** — development server and build tool
-- **npm** — dependency management
-- **PostCSS / Autoprefixer** — cross-browser CSS support
-- **ESLint / Prettier** — code quality and formatting
-
-### Styling Architecture
-
-- **ITCSS** — layered CSS architecture
-- **BEM** — component naming and isolation
-- **CSS Custom Properties** — design tokens and theming
-
-### Assets & Resources
-
-- Custom fonts and icon assets
-- Static mock data for charts and metrics
-
-### Testing
-
-- Manual UI and interaction testing
+| Area           | Tools                                                                        |
+| :------------- | :--------------------------------------------------------------------------- |
+| Markup & logic | HTML5, CSS, JavaScript (ES modules) — no frameworks, no runtime dependencies |
+| Build          | Vite                                                                         |
+| Code quality   | ESLint, Stylelint, Prettier                                                  |
+| CI/CD          | GitHub Actions → GitHub Pages                                                |
 
 ---
 
-## 🧩 Architecture & Development Decisions
+## 🧩 Architecture
 
-- Semantic HTML structure with accessibility in mind:
-  - ARIA attributes
-  - visible focus styles
-  - keyboard-accessible interactions
-- Responsive layout:
-  - mobile-first approach
-  - flexible grid systems
-  - limited and meaningful breakpoints
-- Performance considerations:
-  - optimized and lazy-loaded images
-  - minimized CSS and JavaScript output
-- Code organization:
-  - clear folder structure separating layout objects, components, and utilities
-  - predictable naming and responsibility boundaries
-- Reusability:
-  - shared CSS variables for spacing, colors, and typography
-  - reusable UI components
-- Cross-browser support:
-  - tested in modern versions of Chrome, Firefox, and Safari
+**CSS — ITCSS layers with namespaced BEM.** Styles go from generic to specific: `settings` (design tokens) → `generic` (reset) → `elements` → `objects` (`o-` layout) → `components` (`c-`) → `utilities` (`u-`). States use `is-` classes and `data-state` attributes. Stylelint enforces the naming.
 
----
+**Design tokens.** Colors, spacing, radii, shadows and motion are CSS custom properties. The dark theme works by redefining tokens under `[data-theme="dark"]`.
 
-## ✨ Key Features
+**Event-driven modules.** Each widget is an independent module. A small store loads data and broadcasts `data:loaded` / `data:error` events; widgets subscribe and render. Modules never import each other.
 
-- Dashboard-style layout for analytics data
-- Responsive grid system for widgets and charts
-- Reusable UI components (cards, tables, controls)
-- Clean visual hierarchy for data presentation
-- Accessible and keyboard-friendly interface
+**Mock API.** `src/js/data/api.js` simulates network latency over a static JSON file, so the UI handles real async states.
 
----
-
-## 🎯 What This Project Demonstrates
-
-- Ability to design and implement dashboard-style UIs
-- Strong CSS architecture using ITCSS and BEM
-- Attention to accessibility and usability
-- Performance-aware frontend decisions
-- Clean, scalable code organization suitable for real-world products
+```
+src/
+├── js/
+│   ├── data/      # mock API
+│   ├── state/     # store and data events
+│   └── modules/   # charts, table, metrics, dropdown, sidebar, theme, reveal
+└── styles/        # ITCSS layers: settings → generic → elements → objects → components → utilities
+public/data/       # mock dataset
+```
 
 ---
 
 ## 🧪 Local Development
 
-The project can be run locally using the development server:
+Requires Node.js 22 (see `.nvmrc`).
 
 ```bash
 npm install
-npm run dev
+npm run dev        # dev server
+npm run build      # production build to dist/
+npm run preview    # serve the production build
+npm run lint       # ESLint + Stylelint + Prettier check
+npm run format     # auto-fix formatting
 ```
+
+Every pull request runs lint and build in CI; every push to `main` deploys to GitHub Pages.
