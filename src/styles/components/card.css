@@ -41,9 +41,17 @@
   color: var(--color-danger);
 }
 
+/* Content, skeleton and error share one grid cell, so the hidden content
+   keeps reserving its height and the card does not jump when data arrives */
+.c-card__content,
+.c-skeleton,
+.c-card__error {
+  grid-area: 1 / 1;
+}
+
 .c-card[data-state="loading"] .c-card__content,
 .c-card[data-state="error"] .c-card__content {
-  display: none;
+  visibility: hidden;
 }
 
 .c-card[data-state="loading"] .c-skeleton {

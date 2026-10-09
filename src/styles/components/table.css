@@ -336,7 +336,7 @@ html[data-theme="dark"] .c-table__description {
 }
 
 .c-table-card[data-state="loading"] .c-card__content {
-  display: block;
+  visibility: visible;
 }
 
 .c-table-card[data-state="loading"] [data-table-skeleton] {
