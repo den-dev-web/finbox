@@ -128,7 +128,7 @@ html[data-theme="dark"] .c-chart__svg {
   flex-shrink: 0;
 }
 
-@media (min-width: 720px) {
+@media (width >= 720px) {
   .c-chart--doughnut {
     grid-template-columns: minmax(240px, 1fr) minmax(160px, 0.6fr);
     gap: 0.4rem;

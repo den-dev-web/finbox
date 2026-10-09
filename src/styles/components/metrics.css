@@ -84,7 +84,7 @@ html[data-theme="dark"] .c-metric__delta[data-delta-state="negative"] {
   box-shadow: var(--focus-ring);
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .c-metric__title {
     gap: 0.35rem;
   }

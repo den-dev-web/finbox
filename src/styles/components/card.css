@@ -108,7 +108,7 @@
   }
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .c-card {
     padding: var(--space-sm);
     gap: var(--space-sm);

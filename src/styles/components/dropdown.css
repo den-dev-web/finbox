@@ -53,7 +53,7 @@
   box-shadow: var(--focus-ring);
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .c-dropdown__panel {
     min-width: min(220px, 90vw);
     max-width: calc(100vw - 16px);

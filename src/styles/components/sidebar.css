@@ -73,7 +73,7 @@
   pointer-events: auto;
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .c-sidebar__overlay {
     display: none;
   }

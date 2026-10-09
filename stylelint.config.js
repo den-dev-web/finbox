@@ -25,8 +25,8 @@ export default {
     "color-no-hex": true,
     "color-named": "never",
     "declaration-no-important": true,
-    // Range syntax (width >= 768px) needs Safari/iOS 16.4; keeps `stylelint --fix` from rewriting min-width queries
-    "media-feature-range-notation": "prefix",
+    // Range syntax (width >= 768px): supported by the Safari/iOS >= 16.4 target
+    "media-feature-range-notation": "context",
     // Manual prefixes required for the support target; any other prefix still fails
     "property-no-vendor-prefix": [
       true,
