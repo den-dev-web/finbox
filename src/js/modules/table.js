@@ -1,24 +1,14 @@
-const formatCurrency = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  minimumFractionDigits: 0,
-  maximumFractionDigits: 2,
-});
-
-const formatDate = new Intl.DateTimeFormat("en-GB", {
-  day: "2-digit",
-  month: "short",
-});
-
-const sorters = {
-  date: (a, b) => new Date(a.date) - new Date(b.date),
-  amount: (a, b) => a.amount - b.amount,
-};
-
-const applySort = (data, key, direction) => {
-  const sorted = [...data].sort(sorters[key]);
-  return direction === "asc" ? sorted : sorted.reverse();
-};
+import {
+  FILTER_FIELDS,
+  applyFilters,
+  applySort,
+  collectFilterValues,
+  getPageCount,
+  isFiltering,
+  nextSort,
+  paginate,
+} from "./table/model.js";
+import { createCard, createFilter, createRow } from "./table/render.js";
 
 export default function initTable() {
   const card = document.querySelector("[data-table-card]");
@@ -66,7 +56,6 @@ export default function initTable() {
     amount: "Amount",
   };
 
-  const formatAmount = (value) => formatCurrency.format(value);
   const isMobile = () => window.matchMedia("(max-width: 720px)").matches;
   const alignMenu = (menu, trigger, preferRight = false) => {
     if (!isMobile()) {
@@ -96,97 +85,16 @@ export default function initTable() {
     menu.style.right = alignRight ? "0" : "auto";
   };
 
-  const normalizeValue = (field, row) => {
-    if (field === "date") {
-      return formatDate.format(new Date(row.date));
-    }
-    if (field === "amount") {
-      return formatAmount(row.amount);
-    }
-    return row[field] ?? "";
-  };
-
-  const isFiltering = () => Object.values(state.filters).some((value) => value);
-
-  const applyFilters = (rows) => {
-    const activeFields = Object.entries(state.filters).filter(
-      ([, value]) => value,
-    );
-    if (activeFields.length === 0) {
-      return rows;
-    }
-    return rows.filter((row) =>
-      activeFields.every(
-        ([field, value]) => normalizeValue(field, row) === value,
-      ),
-    );
-  };
-
-  const getPageCount = (rows) =>
-    Math.max(1, Math.ceil(rows.length / state.pageSize));
-
-  const clampPage = (page, pageCount) => Math.min(Math.max(page, 1), pageCount);
-
   const renderFilters = (rows) => {
     if (!filtersContainer) {
       return;
     }
     filtersContainer.innerHTML = "";
-
-    const valuesByField = {
-      date: new Set(),
-      category: new Set(),
-      description: new Set(),
-      amount: new Set(),
-    };
-
-    rows.forEach((row) => {
-      Object.keys(valuesByField).forEach((field) => {
-        valuesByField[field].add(normalizeValue(field, row));
-      });
-    });
-
-    Object.keys(valuesByField).forEach((field) => {
-      const values = [...valuesByField[field]];
-      const filter = document.createElement("div");
-      filter.className = "c-table__filter";
-
-      const trigger = document.createElement("button");
-      trigger.type = "button";
-      trigger.className = "c-table__filter-chip";
-      trigger.setAttribute("data-filter-trigger", field);
-      trigger.setAttribute("aria-expanded", "false");
-      trigger.setAttribute("aria-haspopup", "listbox");
-      trigger.textContent = `${fieldLabels[field]}: All`;
-
-      const menu = document.createElement("div");
-      menu.className = "c-table__filter-menu";
-      menu.setAttribute("role", "listbox");
-      menu.setAttribute("data-filter-menu", field);
-
-      const allOption = document.createElement("button");
-      allOption.type = "button";
-      allOption.className = "c-table__filter-option";
-      allOption.setAttribute("role", "option");
-      allOption.setAttribute("data-filter-option", field);
-      allOption.setAttribute("data-filter-value", "");
-      allOption.textContent = "All";
-      menu.appendChild(allOption);
-
-      values.forEach((value) => {
-        const option = document.createElement("button");
-        option.type = "button";
-        option.className = "c-table__filter-option";
-        option.setAttribute("role", "option");
-        option.setAttribute("data-filter-option", field);
-        option.setAttribute("data-filter-value", value);
-        option.textContent = value;
-        menu.appendChild(option);
-      });
-
-      filter.appendChild(trigger);
-      filter.appendChild(menu);
-      filtersContainer.appendChild(filter);
+    const valuesByField = collectFilterValues(rows);
+    FILTER_FIELDS.forEach((field) => {
+      filtersContainer.appendChild(
+        createFilter(field, fieldLabels[field], valuesByField[field]),
+      );
     });
 
     updateFilterUI();
@@ -225,7 +133,7 @@ export default function initTable() {
     });
 
     if (resetFiltersButton) {
-      resetFiltersButton.disabled = !isFiltering();
+      resetFiltersButton.disabled = !isFiltering(state.filters);
     }
   };
 
@@ -294,12 +202,14 @@ export default function initTable() {
     closeActionMenus();
     closeFilterMenus();
 
-    const filtered = applyFilters(state.rows);
+    const filtered = applyFilters(state.rows, state.filters);
     const sorted = applySort(filtered, state.sortKey, state.sortDirection);
-    const pageCount = getPageCount(sorted);
-    state.page = clampPage(state.page, pageCount);
-    const start = (state.page - 1) * state.pageSize;
-    const pageRows = sorted.slice(start, start + state.pageSize);
+    const { page, pageCount, start, pageRows } = paginate(
+      sorted,
+      state.page,
+      state.pageSize,
+    );
+    state.page = page;
 
     if (pageRows.length === 0) {
       if (emptyState) {
@@ -322,158 +232,9 @@ export default function initTable() {
     }
 
     pageRows.forEach((row, index) => {
-      const tr = document.createElement("tr");
-
-      const dateCell = document.createElement("td");
-      dateCell.textContent = formatDate.format(new Date(row.date));
-      dateCell.className = "c-table__date";
-
-      const categoryCell = document.createElement("td");
-      categoryCell.textContent = row.category;
-      categoryCell.className = "c-table__category";
-
-      const descCell = document.createElement("td");
-      descCell.textContent = row.description;
-      descCell.className = "c-table__description";
-
-      const amountCell = document.createElement("td");
-      amountCell.textContent = formatCurrency.format(row.amount);
-      amountCell.className = `c-table__amount ${
-        row.amount >= 0
-          ? "c-table__amount--positive"
-          : "c-table__amount--negative"
-      }`;
-
-      const actionCell = document.createElement("td");
-      actionCell.className = "c-table__actions";
-
-      const menuId = `action-menu-${index}`;
-
-      const actionButton = document.createElement("button");
-      actionButton.type = "button";
-      actionButton.className = "c-table__action-toggle";
-      actionButton.setAttribute("aria-haspopup", "menu");
-      actionButton.setAttribute("aria-expanded", "false");
-      actionButton.setAttribute("aria-controls", menuId);
-      actionButton.setAttribute("data-action-toggle", "true");
-      actionButton.textContent = "⋮";
-
-      const actionMenu = document.createElement("div");
-      actionMenu.className = "c-table__action-menu";
-      actionMenu.id = menuId;
-      actionMenu.setAttribute("role", "menu");
-      actionMenu.setAttribute("data-action-menu", "true");
-
-      const editButton = document.createElement("button");
-      editButton.type = "button";
-      editButton.className = "c-table__action-item";
-      editButton.setAttribute("role", "menuitem");
-      editButton.setAttribute("data-action-item", "edit");
-      editButton.textContent = "Edit";
-
-      const deleteButton = document.createElement("button");
-      deleteButton.type = "button";
-      deleteButton.className = "c-table__action-item";
-      deleteButton.setAttribute("role", "menuitem");
-      deleteButton.setAttribute("data-action-item", "delete");
-      deleteButton.textContent = "Delete";
-
-      actionMenu.appendChild(editButton);
-      actionMenu.appendChild(deleteButton);
-      actionCell.appendChild(actionButton);
-      actionCell.appendChild(actionMenu);
-
-      tr.appendChild(dateCell);
-      tr.appendChild(categoryCell);
-      tr.appendChild(descCell);
-      tr.appendChild(amountCell);
-      tr.appendChild(actionCell);
-      body.appendChild(tr);
-
+      body.appendChild(createRow(row, index));
       if (cards) {
-        const cardItem = document.createElement("div");
-        cardItem.className = "c-table__card";
-
-        const header = document.createElement("div");
-        header.className = "c-table__card-header";
-
-        const meta = document.createElement("div");
-        meta.className = "c-table__card-meta";
-
-        const category = document.createElement("span");
-        category.textContent = row.category;
-        category.className = "c-table__category";
-
-        const date = document.createElement("span");
-        date.textContent = formatDate.format(new Date(row.date));
-        date.className = "c-table__date";
-
-        meta.appendChild(category);
-        meta.appendChild(date);
-
-        const amountWrap = document.createElement("div");
-        amountWrap.className = "c-table__card-amount";
-
-        const amount = document.createElement("span");
-        amount.textContent = formatCurrency.format(row.amount);
-        amount.className = `c-table__amount ${
-          row.amount >= 0
-            ? "c-table__amount--positive"
-            : "c-table__amount--negative"
-        }`;
-
-        const actions = document.createElement("div");
-        actions.className = "c-table__card-actions";
-
-        const cardMenuId = `action-menu-card-${index}`;
-
-        const actionButton = document.createElement("button");
-        actionButton.type = "button";
-        actionButton.className = "c-table__action-toggle";
-        actionButton.setAttribute("aria-haspopup", "menu");
-        actionButton.setAttribute("aria-expanded", "false");
-        actionButton.setAttribute("aria-controls", cardMenuId);
-        actionButton.setAttribute("data-action-toggle", "true");
-        actionButton.textContent = "⋮";
-
-        const actionMenu = document.createElement("div");
-        actionMenu.className = "c-table__action-menu";
-        actionMenu.id = cardMenuId;
-        actionMenu.setAttribute("role", "menu");
-        actionMenu.setAttribute("data-action-menu", "true");
-
-        const editButton = document.createElement("button");
-        editButton.type = "button";
-        editButton.className = "c-table__action-item";
-        editButton.setAttribute("role", "menuitem");
-        editButton.setAttribute("data-action-item", "edit");
-        editButton.textContent = "Edit";
-
-        const deleteButton = document.createElement("button");
-        deleteButton.type = "button";
-        deleteButton.className = "c-table__action-item";
-        deleteButton.setAttribute("role", "menuitem");
-        deleteButton.setAttribute("data-action-item", "delete");
-        deleteButton.textContent = "Delete";
-
-        actionMenu.appendChild(editButton);
-        actionMenu.appendChild(deleteButton);
-        actions.appendChild(actionButton);
-        actions.appendChild(actionMenu);
-
-        amountWrap.appendChild(amount);
-        amountWrap.appendChild(actions);
-
-        header.appendChild(meta);
-        header.appendChild(amountWrap);
-
-        const description = document.createElement("p");
-        description.textContent = row.description;
-        description.className = "c-table__description";
-
-        cardItem.appendChild(header);
-        cardItem.appendChild(description);
-        cards.appendChild(cardItem);
+        cards.appendChild(createCard(row, index));
       }
     });
 
@@ -519,12 +280,7 @@ export default function initTable() {
       if (!key) {
         return;
       }
-      if (state.sortKey === key) {
-        state.sortDirection = state.sortDirection === "asc" ? "desc" : "asc";
-      } else {
-        state.sortKey = key;
-        state.sortDirection = key === "amount" ? "desc" : "asc";
-      }
+      Object.assign(state, nextSort(state, key));
       state.page = 1;
       render();
       updateSortUI();
@@ -633,9 +389,10 @@ export default function initTable() {
 
   if (pageLast) {
     pageLast.addEventListener("click", () => {
-      const filtered = applyFilters(state.rows);
-      const sorted = applySort(filtered, state.sortKey, state.sortDirection);
-      state.page = getPageCount(sorted);
+      state.page = getPageCount(
+        applyFilters(state.rows, state.filters).length,
+        state.pageSize,
+      );
       render();
     });
   }
