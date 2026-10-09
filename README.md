@@ -22,7 +22,7 @@ A financial analytics dashboard built with vanilla JavaScript, modern CSS and no
 - **SVG charts drawn from scratch** — line, doughnut and grouped bar charts without a chart library
 - **Currency conversion** — USD data shown in USD, EUR or UAH with fixed demo rates; CSV export follows the setting
 - **Themes** — follow the OS live or stay light / dark; applied before first paint, so no flash
-- **Loading, error and empty states** for every widget; skeletons keep the layout still (CLS 0)
+- **Loading, error and empty states** for every widget; skeletons keep the layout still
 - **Accessible forms and widgets** — labelled fields with inline errors, focus management in the dialog, listbox keyboard pattern, WCAG AA contrast
 - **Page transitions** — cross-document View Transitions where supported, plain navigation elsewhere
 - **Resilient** — works with blocked storage (private modes) and in Safari 15 without `<dialog>` support
@@ -33,12 +33,19 @@ Append `?fail=1` to the URL to see the error states.
 
 ## 📊 Lighthouse
 
-Measured on the live demo, light and dark themes.
+Measured on the live demo for all four pages.
 
 | Profile | Performance | Accessibility | Best Practices | SEO |
 | :------ | :---------: | :-----------: | :------------: | :-: |
-| Mobile  |     98+     |      100      |      100       | 100 |
+| Mobile  |   98–100    |      100      |      100       | 100 |
 | Desktop |     100     |      100      |      100       | 100 |
+
+- **Layout stays still (CLS ≤ 0.004, “good” is < 0.1):** skeletons reserve the final size of every widget.
+- **WCAG AA contrast** in both themes: text colors are separate tokens with a verified 4.5:1 ratio.
+
+------ | :---------: | :-----------: | :------------: | :-: |
+| Mobile | 98+ | 100 | 100 | 100 |
+| Desktop | 100 | 100 | 100 | 100 |
 
 - **No layout shift (CLS 0):** skeletons reserve the final size of every widget.
 - **WCAG AA contrast** in both themes: text colors are separate tokens with a verified 4.5:1 ratio.
