@@ -1,0 +1,172 @@
+.c-report-period {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Grouped bar chart: income and expenses per month */
+.c-bar-chart {
+  position: relative;
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.c-bar-chart__svg {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 640 / 220;
+}
+
+.c-bar-chart__grid {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+}
+
+.c-bar-chart__bar--income {
+  fill: var(--color-success);
+}
+
+.c-bar-chart__bar--expense {
+  fill: var(--color-danger);
+}
+
+.c-bar-chart__legend {
+  display: flex;
+  gap: var(--space-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.c-bar-chart__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.c-bar-chart__key::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 0.2rem;
+}
+
+.c-bar-chart__key--income::before {
+  background-color: var(--color-success);
+}
+
+.c-bar-chart__key--expense::before {
+  background-color: var(--color-danger);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .c-bar-chart__bar {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: bar-grow var(--dur-2) var(--ease-out) both;
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleY(0);
+  }
+
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* Spending by category: name, amount and share with a proportional bar */
+.c-category-list {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-category-list__row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  font-size: var(--font-size-sm);
+}
+
+.c-category-list__name {
+  font-weight: 600;
+}
+
+.c-category-list__amount {
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.c-category-list__track {
+  height: 0.5rem;
+  margin-top: 0.35rem;
+  border-radius: 999px;
+  background-color: var(--color-bg-alt);
+  overflow: hidden;
+}
+
+.c-category-list__bar {
+  height: 100%;
+  border-radius: inherit;
+  background-color: var(--color-primary);
+}
+
+/* Monthly summary: scrolls horizontally on narrow screens */
+.c-report-table__scroll {
+  overflow-x: auto;
+  border-radius: calc(var(--radius-md) - 6px);
+}
+
+.c-report-table__scroll:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.c-report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.c-report-table th,
+.c-report-table td {
+  padding: 0.55rem 0.6rem;
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.c-report-table th:first-child,
+.c-report-table td:first-child {
+  text-align: left;
+}
+
+.c-report-table thead th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.c-report-table tbody th {
+  font-weight: 600;
+}
+
+.c-report-table tbody tr:last-child th,
+.c-report-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.c-report-table__value--positive {
+  color: var(--color-success-text);
+}
+
+.c-report-table__value--negative {
+  color: var(--color-danger-text);
+}

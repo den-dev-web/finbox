@@ -1,6 +1,7 @@
 // Key pages of the project: used by html, a11y and visual tests (paths are relative to baseURL).
 export const PAGES = {
   dashboard: "./",
+  reports: "./reports/",
 };
 
 export const THEMES = ["light", "dark"];

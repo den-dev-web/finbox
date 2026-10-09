@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <!-- @include head-common -->
+    <title>FinBox — Reports</title>
+    <meta
+      name="description"
+      content="FinBox reports: monthly income and expenses, savings rate and spending by category."
+    />
+    <link
+      rel="canonical"
+      href="https://den-dev-web.github.io/finbox/reports/"
+    />
+    <meta property="og:title" content="FinBox — Reports" />
+    <meta
+      property="og:description"
+      content="FinBox reports: monthly income and expenses, savings rate and spending by category."
+    />
+    <meta
+      property="og:url"
+      content="https://den-dev-web.github.io/finbox/reports/"
+    />
+  </head>
+  <body>
+    <div class="o-shell">
+      <!-- @include sidebar -->
+
+      <div
+        class="c-sidebar__overlay"
+        aria-hidden="true"
+        data-sidebar-overlay
+      ></div>
+
+      <div class="o-content">
+        <!-- @block header title="Reports" -->
+        <button
+          class="c-header__button"
+          type="button"
+          data-report-export
+          disabled
+        >
+          Export CSV
+        </button>
+        <!-- @endblock -->
+
+        <main class="o-main">
+          <div class="o-container">
+            <p class="c-report-period">Last 12 months</p>
+            <div class="o-dashboard-grid">
+              <section
+                class="c-card c-metric c-metric--income u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Income</h2>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-report-total="income">—</p>
+                    <p class="c-metric__summary">
+                      Salary, freelance and interest.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--expense u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Expenses</h2>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-report-total="expense">—</p>
+                    <p class="c-metric__summary">
+                      Everything spent over the year.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--balance u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Net</h2>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-report-total="net">—</p>
+                    <p class="c-metric__summary">Income minus expenses.</p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card c-metric c-metric--accounts u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Savings rate</h2>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-report-total="savings">—</p>
+                    <p class="c-metric__summary">Share of income kept.</p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card o-dashboard-grid__span-4 u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title" id="report-chart-title">
+                    Income vs Expenses
+                  </h2>
+                  <div class="c-bar-chart__legend" aria-hidden="true">
+                    <span class="c-bar-chart__key c-bar-chart__key--income"
+                      >Income</span
+                    >
+                    <span class="c-bar-chart__key c-bar-chart__key--expense"
+                      >Expenses</span
+                    >
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div class="c-bar-chart">
+                      <span class="c-chart__unit">USD</span>
+                      <svg
+                        class="c-bar-chart__svg"
+                        viewBox="0 0 640 220"
+                        role="img"
+                        aria-labelledby="report-chart-title"
+                        aria-describedby="report-table-title"
+                        data-report-chart
+                      ></svg>
+                      <!-- Placeholder reserves the label row until data renders -->
+                      <div class="c-chart__labels" data-report-labels>
+                        <div>&nbsp;</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card o-dashboard-grid__span-2 u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Spending by category</h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <ul class="c-category-list" data-report-categories></ul>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card o-dashboard-grid__span-2 u-reveal"
+                data-state="loading"
+                data-report-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title" id="report-table-title">
+                    Monthly summary
+                  </h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div
+                      class="c-report-table__scroll"
+                      tabindex="0"
+                      role="region"
+                      aria-labelledby="report-table-title"
+                    >
+                      <table class="c-report-table">
+                        <thead>
+                          <tr>
+                            <th scope="col">Month</th>
+                            <th scope="col">Income</th>
+                            <th scope="col">Expenses</th>
+                            <th scope="col">Net</th>
+                            <th scope="col">Savings</th>
+                          </tr>
+                        </thead>
+                        <tbody data-report-rows></tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button
+                      class="c-metric__retry"
+                      type="button"
+                      data-report-retry
+                    >
+                      Retry
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </main>
+        <footer class="o-footer">
+          <div class="o-container">
+            <small>FinBox © 2026</small>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script type="module" src="/src/js/pages/reports.js"></script>
+  </body>
+</html>

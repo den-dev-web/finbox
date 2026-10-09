@@ -1,6 +1,9 @@
 .c-card {
   display: flex;
   flex-direction: column;
+
+  /* Grid items default to min-width: auto; let wide content scroll inside */
+  min-width: 0;
   gap: var(--space-md);
   padding: var(--space-md);
   border-radius: var(--radius-md);

@@ -7,6 +7,7 @@ const root = (path) => fileURLToPath(new URL(path, import.meta.url));
 // Pages by nav name; nested index.html files give clean URLs (/finbox/reports/)
 const PAGES = {
   dashboard: "index.html",
+  reports: "reports/index.html",
 };
 
 const INCLUDE_PATTERN = /<!-- @include ([\w-]+) -->/g;

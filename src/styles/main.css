@@ -9,6 +9,7 @@
 @import url("./components/metrics.css");
 @import url("./components/charts.css");
 @import url("./components/table.css");
+@import url("./components/reports.css");
 @import url("./utilities/motion.css");
 
 /* Objects, components, utilities will be layered here next. */
