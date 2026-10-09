@@ -102,7 +102,11 @@
     height: 100vh;
     transform: none;
   }
+}
 
+/* Four columns need 240px sidebar + 2 × 24px padding + 4 × 220px + 3 × 16px
+   gaps = 1216px; narrower desktops keep the two-column grid */
+@media (min-width: 1280px) {
   .o-dashboard-grid {
     grid-template-columns: repeat(4, minmax(220px, 1fr));
   }

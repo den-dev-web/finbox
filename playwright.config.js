@@ -39,6 +39,7 @@ export default defineConfig({
         "settings.spec.js",
         "reports.spec.js",
         "accounts.spec.js",
+        "layout.spec.js",
       ],
       use: devices["Desktop Chrome"],
     },

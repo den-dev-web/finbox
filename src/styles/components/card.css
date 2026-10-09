@@ -37,6 +37,9 @@
 .c-card__body {
   flex: 1;
   display: grid;
+
+  /* An implicit column grows with wide content (tables); this one can shrink */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-sm);
 }
 
