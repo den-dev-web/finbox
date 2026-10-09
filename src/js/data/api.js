@@ -1,4 +1,4 @@
-const DATA_URL = new URL("../../../data/finbox.mock.json", import.meta.url);
+const DATA_URL = `${import.meta.env.BASE_URL}data/finbox.mock.json`;
 
 const sleep = (minMs = 300, maxMs = 800) =>
   new Promise((resolve) => {
@@ -19,11 +19,11 @@ export async function getDashboard(period) {
   try {
     response = await fetch(DATA_URL);
   } catch (error) {
-    throw new Error("Failed to fetch mock data. Check data/finbox.mock.json.");
+    throw new Error("Failed to fetch mock data. Check public/data/finbox.mock.json.");
   }
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error("Mock data file not found. Check data/finbox.mock.json.");
+      throw new Error("Mock data file not found. Check public/data/finbox.mock.json.");
     }
     throw new Error("Failed to load mock data");
   }
