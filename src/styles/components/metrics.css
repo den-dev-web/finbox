@@ -36,13 +36,13 @@
   font-size: 0.75rem;
   font-weight: 600;
   background: rgb(24 162 115 / 12%);
-  color: var(--color-success);
+  color: var(--color-success-text);
   border: 1px solid rgb(24 162 115 / 20%);
 }
 
 .c-metric__delta[data-delta-state="negative"] {
   background: rgb(217 75 75 / 12%);
-  color: var(--color-danger);
+  color: var(--color-danger-text);
   border-color: rgb(217 75 75 / 24%);
 }
 
@@ -55,12 +55,8 @@
 .c-metric__summary {
   margin: 0;
   font-size: 0.85rem;
-  color: rgb(27 30 40 / 62%);
+  color: var(--color-text-muted);
   line-height: 1.45;
-}
-
-html[data-theme="dark"] .c-metric__summary {
-  color: rgb(231 235 245 / 62%);
 }
 
 html[data-theme="dark"] .c-metric__delta {
