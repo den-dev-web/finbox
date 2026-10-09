@@ -19,7 +19,9 @@ export async function getDashboard(period) {
   try {
     response = await fetch(DATA_URL);
   } catch (error) {
-    throw new Error("Failed to fetch mock data. Check public/data/finbox.mock.json.");
+    throw new Error("Failed to fetch mock data. Check public/data/finbox.mock.json.", {
+      cause: error,
+    });
   }
   if (!response.ok) {
     if (response.status === 404) {

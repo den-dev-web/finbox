@@ -35,15 +35,15 @@
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
-  background: rgba(24, 162, 115, 0.12);
+  background: rgb(24 162 115 / 12%);
   color: var(--color-success);
-  border: 1px solid rgba(24, 162, 115, 0.2);
+  border: 1px solid rgb(24 162 115 / 20%);
 }
 
 .c-metric__delta[data-delta-state="negative"] {
-  background: rgba(217, 75, 75, 0.12);
+  background: rgb(217 75 75 / 12%);
   color: var(--color-danger);
-  border-color: rgba(217, 75, 75, 0.24);
+  border-color: rgb(217 75 75 / 24%);
 }
 
 .c-metric__value {
@@ -55,22 +55,22 @@
 .c-metric__summary {
   margin: 0;
   font-size: 0.85rem;
-  color: rgba(27, 30, 40, 0.62);
+  color: rgb(27 30 40 / 62%);
   line-height: 1.45;
 }
 
 html[data-theme="dark"] .c-metric__summary {
-  color: rgba(231, 235, 245, 0.62);
+  color: rgb(231 235 245 / 62%);
 }
 
 html[data-theme="dark"] .c-metric__delta {
-  background: rgba(60, 194, 138, 0.16);
-  border-color: rgba(60, 194, 138, 0.28);
+  background: rgb(60 194 138 / 16%);
+  border-color: rgb(60 194 138 / 28%);
 }
 
 html[data-theme="dark"] .c-metric__delta[data-delta-state="negative"] {
-  background: rgba(255, 107, 107, 0.16);
-  border-color: rgba(255, 107, 107, 0.3);
+  background: rgb(255 107 107 / 16%);
+  border-color: rgb(255 107 107 / 30%);
 }
 
 .c-metric__retry {
@@ -88,7 +88,7 @@ html[data-theme="dark"] .c-metric__delta[data-delta-state="negative"] {
   box-shadow: var(--focus-ring);
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .c-metric__title {
     gap: 0.35rem;
   }

@@ -11,8 +11,8 @@
   aspect-ratio: 16 / 10;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0)
+    rgb(255 255 255 / 60%),
+    rgb(255 255 255 / 0%)
   );
   border-radius: calc(var(--radius-md) - 6px);
 }
@@ -20,8 +20,8 @@
 html[data-theme="dark"] .c-chart__svg {
   background: linear-gradient(
     180deg,
-    rgba(15, 18, 26, 0.6),
-    rgba(15, 18, 26, 0)
+    rgb(15 18 26 / 60%),
+    rgb(15 18 26 / 0%)
   );
 }
 
@@ -60,13 +60,13 @@ html[data-theme="dark"] .c-chart__svg {
   left: 0.55rem;
   font-size: 0.7rem;
   font-weight: 600;
-  color: rgba(27, 30, 40, 0.55);
+  color: rgb(27 30 40 / 55%);
   letter-spacing: 0.04em;
   pointer-events: none;
 }
 
 html[data-theme="dark"] .c-chart__unit {
-  color: rgba(231, 235, 245, 0.55);
+  color: rgb(231 235 245 / 55%);
 }
 
 .c-chart__labels {
@@ -74,12 +74,12 @@ html[data-theme="dark"] .c-chart__unit {
   grid-template-columns: repeat(var(--chart-label-count, 4), minmax(0, 1fr));
   gap: 0.35rem;
   font-size: var(--font-size-sm);
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
   text-align: center;
 }
 
 html[data-theme="dark"] .c-chart__labels {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 .c-chart__labels div {
@@ -92,7 +92,7 @@ html[data-theme="dark"] .c-chart__labels {
   gap: 0.35rem 1rem;
   padding-top: 0.4rem;
   font-size: 0.78rem;
-  color: rgba(27, 30, 40, 0.65);
+  color: rgb(27 30 40 / 65%);
 }
 
 .c-chart__stat {
@@ -106,7 +106,7 @@ html[data-theme="dark"] .c-chart__labels {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.65rem;
-  color: rgba(27, 30, 40, 0.5);
+  color: rgb(27 30 40 / 50%);
 }
 
 .c-chart__stat-value {
@@ -115,11 +115,11 @@ html[data-theme="dark"] .c-chart__labels {
 }
 
 html[data-theme="dark"] .c-chart__stats {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 html[data-theme="dark"] .c-chart__stat-label {
-  color: rgba(231, 235, 245, 0.45);
+  color: rgb(231 235 245 / 45%);
 }
 
 .c-chart--doughnut .c-chart__svg {
@@ -148,7 +148,7 @@ html[data-theme="dark"] .c-chart__stat-label {
   flex-shrink: 0;
 }
 
-@media (min-width: 720px) {
+@media (width >= 720px) {
   .c-chart--doughnut {
     grid-template-columns: minmax(240px, 1fr) minmax(160px, 0.6fr);
     gap: 0.4rem;

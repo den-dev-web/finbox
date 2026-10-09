@@ -11,7 +11,7 @@
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
   border-bottom: 0;
 }
 
@@ -65,7 +65,7 @@
 }
 
 .c-table__date {
-  color: rgba(27, 30, 40, 0.7);
+  color: rgb(27 30 40 / 70%);
   font-size: 0.8rem;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .c-table__description {
-  color: rgba(27, 30, 40, 0.72);
+  color: rgb(27 30 40 / 72%);
 }
 
 .c-table__amount {
@@ -132,7 +132,7 @@
 
 .c-table__filter-chip.is-active {
   background: var(--color-bg-alt);
-  border-color: rgba(43, 109, 255, 0.4);
+  border-color: rgb(43 109 255 / 40%);
   color: var(--color-primary);
   font-weight: 600;
 }
@@ -201,7 +201,7 @@
   box-shadow: var(--focus-ring);
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .c-table__filter-menu {
     min-width: min(220px, 90vw);
     max-width: calc(100vw - 16px);
@@ -286,9 +286,9 @@
   border-radius: 0.4rem;
   background: linear-gradient(
     90deg,
-    rgba(0, 0, 0, 0.04) 0%,
-    rgba(0, 0, 0, 0.12) 50%,
-    rgba(0, 0, 0, 0.04) 100%
+    rgb(0 0 0 / 4%) 0%,
+    rgb(0 0 0 / 12%) 50%,
+    rgb(0 0 0 / 4%) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 1.6s linear infinite;
@@ -303,17 +303,17 @@
 .c-table__empty {
   text-align: center;
   padding: 1rem 0.4rem;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
 }
 
 html[data-theme="dark"] .c-table__empty {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 html[data-theme="dark"] .c-table__head th,
 html[data-theme="dark"] .c-table__date,
 html[data-theme="dark"] .c-table__description {
-  color: rgba(231, 235, 245, 0.65);
+  color: rgb(231 235 245 / 65%);
 }
 
 .c-table__retry {
@@ -361,7 +361,7 @@ html[data-theme="dark"] .c-table__description {
 
 .c-table__page-summary {
   font-size: 0.75rem;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
 }
 
 .c-table__page-size {
@@ -369,7 +369,7 @@ html[data-theme="dark"] .c-table__description {
   align-items: center;
   gap: 0.5rem;
   font-size: 0.75rem;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
 }
 
 .c-table__page-select {
@@ -389,7 +389,7 @@ html[data-theme="dark"] .c-table__description {
 
 .c-table__page-info {
   font-size: 0.75rem;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
 }
 
 .c-table__page-btn {
@@ -452,20 +452,20 @@ html[data-theme="dark"] .c-table__description {
   display: none;
   text-align: center;
   padding: 1rem 0.4rem;
-  color: rgba(27, 30, 40, 0.6);
+  color: rgb(27 30 40 / 60%);
 }
 
 html[data-theme="dark"] .c-table__page-info {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 html[data-theme="dark"] .c-table__page-summary,
 html[data-theme="dark"] .c-table__page-size {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 html[data-theme="dark"] .c-table__empty-card {
-  color: rgba(231, 235, 245, 0.6);
+  color: rgb(231 235 245 / 60%);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -474,7 +474,7 @@ html[data-theme="dark"] .c-table__empty-card {
   }
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .c-table-card .c-card__header {
     flex-direction: column;
     align-items: flex-start;
@@ -520,7 +520,7 @@ html[data-theme="dark"] .c-table__empty-card {
   }
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .c-table__filters {
     gap: 0.4rem;
   }

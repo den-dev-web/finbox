@@ -50,7 +50,7 @@
   background: var(--color-bg-alt);
 }
 
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .c-header {
     flex-wrap: wrap;
     align-items: center;
@@ -64,6 +64,9 @@
   .c-header__profile {
     order: 2;
     margin-left: auto;
+    width: 36px;
+    height: 36px;
+    font-size: 0.75rem;
   }
 
   .c-header__actions {
@@ -79,28 +82,22 @@
     padding: 0.4rem 0.6rem;
     font-size: 0.85rem;
   }
-
-  .c-header__profile {
-    width: 36px;
-    height: 36px;
-    font-size: 0.75rem;
-  }
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .c-header__button {
     padding: 0.35rem 0.5rem;
     font-size: 0.8rem;
   }
 }
 
-@media (max-width: 1023px) {
+@media (width <= 1023px) {
   .c-header__button--theme {
     display: none;
   }
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   [data-sidebar-toggle] {
     display: none;
   }

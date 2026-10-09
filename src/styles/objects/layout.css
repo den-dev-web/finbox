@@ -51,7 +51,7 @@
   grid-column: span 4;
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   .o-header,
   .o-main,
   .o-footer {
@@ -73,7 +73,7 @@
   }
 }
 
-@media (min-width: 561px) {
+@media (width >= 561px) {
   .o-header,
   .o-main,
   .o-footer {
@@ -89,7 +89,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (width >= 1024px) {
   .o-shell {
     display: grid;
     grid-template-columns: 240px 1fr;

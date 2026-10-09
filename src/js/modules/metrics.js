@@ -80,7 +80,6 @@ export default function initMetrics() {
 
   document.addEventListener("data:loaded", (event) => {
     const data = event.detail?.data;
-    const period = event.detail?.period ?? state.period;
     if (!data) {
       return;
     }
