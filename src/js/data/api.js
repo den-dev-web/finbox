@@ -6,12 +6,14 @@ const sleep = (minMs = 300, maxMs = 800) =>
     setTimeout(resolve, delay);
   });
 
-const maybeFail = (chance = 0.08) => Math.random() < chance;
+// Error state is opt-in for demos: append ?fail=1 to the URL
+const shouldFail = () =>
+  new URLSearchParams(window.location.search).get("fail") === "1";
 
 export async function getDashboard(period) {
   await sleep();
 
-  if (maybeFail()) {
+  if (shouldFail()) {
     throw new Error("Mock request failed");
   }
 
