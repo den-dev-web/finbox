@@ -24,3 +24,15 @@ test("error state with ?fail=1 and retry", async ({ page }) => {
   await card.getByRole("button", { name: "Retry" }).click();
   await expect(card).toHaveAttribute("data-state", "error");
 });
+
+test("transactions render as cards with filters", async ({ page }) => {
+  await page.goto(PAGES.dashboard);
+  const cards = page.locator("[data-table-cards] .c-table__card");
+  await expect(cards).toHaveCount(4);
+  await page.locator('[data-filter-trigger="category"]').click();
+  await page
+    .locator('[data-filter-option="category"][data-filter-value="Salary"]')
+    .click();
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toContainText("$5,400");
+});

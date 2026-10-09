@@ -59,3 +59,14 @@ test("table filters by category and resets", async ({ page }) => {
   await page.locator("[data-table-filter-reset]").click();
   await expect(rows).toHaveCount(4);
 });
+
+test("row action menu opens and closes with Escape", async ({ page }) => {
+  const toggle = page.locator("[data-table-body] [data-action-toggle]").first();
+  const menu = page.locator(`#${await toggle.getAttribute("aria-controls")}`);
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-expanded", "true");
+  await expect(menu.getByRole("menuitem", { name: "Edit" })).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(toggle).toHaveAttribute("aria-expanded", "false");
+  await expect(menu).toBeHidden();
+});
