@@ -29,6 +29,23 @@ export interface DashboardData {
   transactions: Transaction[];
 }
 
+export interface MonthTotal {
+  /** "YYYY-MM" */
+  month: string;
+  income: number;
+  expense: number;
+}
+
+export interface CategoryTotal {
+  category: string;
+  amount: number;
+}
+
+export interface ReportsData {
+  months: MonthTotal[];
+  categories: CategoryTotal[];
+}
+
 export interface DataLoadedDetail {
   period: Period;
   data: DashboardData;

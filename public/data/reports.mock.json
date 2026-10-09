@@ -1,0 +1,98 @@
+{
+  "months": [
+    {
+      "month": "2025-05",
+      "income": 5478.34,
+      "expense": 6088.09
+    },
+    {
+      "month": "2025-06",
+      "income": 7643.2,
+      "expense": 4136.06
+    },
+    {
+      "month": "2025-07",
+      "income": 5547.38,
+      "expense": 5329.41
+    },
+    {
+      "month": "2025-08",
+      "income": 6434.0,
+      "expense": 5159.97
+    },
+    {
+      "month": "2025-09",
+      "income": 7633.19,
+      "expense": 5029.08
+    },
+    {
+      "month": "2025-10",
+      "income": 6892.93,
+      "expense": 3905.83
+    },
+    {
+      "month": "2025-11",
+      "income": 5453.29,
+      "expense": 5778.55
+    },
+    {
+      "month": "2025-12",
+      "income": 6341.38,
+      "expense": 5949.22
+    },
+    {
+      "month": "2026-01",
+      "income": 6421.53,
+      "expense": 4383.52
+    },
+    {
+      "month": "2026-02",
+      "income": 6131.72,
+      "expense": 6197.49
+    },
+    {
+      "month": "2026-03",
+      "income": 6186.62,
+      "expense": 6199.21
+    },
+    {
+      "month": "2026-04",
+      "income": 6916.53,
+      "expense": 5563.16
+    }
+  ],
+  "categories": [
+    {
+      "category": "Bills",
+      "amount": 17204.29
+    },
+    {
+      "category": "Food",
+      "amount": 14018.31
+    },
+    {
+      "category": "Transport",
+      "amount": 7009.15
+    },
+    {
+      "category": "Shopping",
+      "amount": 7646.35
+    },
+    {
+      "category": "Travel",
+      "amount": 5734.76
+    },
+    {
+      "category": "Health",
+      "amount": 4460.37
+    },
+    {
+      "category": "Entertainment",
+      "amount": 3823.18
+    },
+    {
+      "category": "Other",
+      "amount": 3823.18
+    }
+  ]
+}

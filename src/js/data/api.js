@@ -1,4 +1,4 @@
-const DATA_URL = `${import.meta.env.BASE_URL}data/finbox.mock.json`;
+const DATA_DIR = `${import.meta.env.BASE_URL}data/`;
 
 const sleep = (minMs = 300, maxMs = 800) =>
   new Promise((resolve) => {
@@ -12,13 +12,14 @@ const shouldFail = () =>
 
 /** @typedef {import("../types").Period} Period */
 /** @typedef {import("../types").DashboardData} DashboardData */
+/** @typedef {import("../types").ReportsData} ReportsData */
 
 /**
- * Loads the dashboard data of one period from the mock JSON file.
- * @param {Period} period
- * @returns {Promise<DashboardData>}
+ * Fetches a mock JSON file with simulated latency, like a real API call.
+ * @param {string} file name inside public/data/
+ * @returns {Promise<any>}
  */
-export async function getDashboard(period) {
+const loadMock = async (file) => {
   await sleep();
 
   if (shouldFail()) {
@@ -27,25 +28,29 @@ export async function getDashboard(period) {
 
   let response;
   try {
-    response = await fetch(DATA_URL);
+    response = await fetch(`${DATA_DIR}${file}`);
   } catch (error) {
-    throw new Error(
-      "Failed to fetch mock data. Check public/data/finbox.mock.json.",
-      {
-        cause: error,
-      },
-    );
+    throw new Error(`Failed to fetch mock data. Check public/data/${file}.`, {
+      cause: error,
+    });
   }
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error(
-        "Mock data file not found. Check public/data/finbox.mock.json.",
-      );
+      throw new Error(`Mock data file not found. Check public/data/${file}.`);
     }
     throw new Error("Failed to load mock data");
   }
 
-  const data = await response.json();
+  return response.json();
+};
+
+/**
+ * Loads the dashboard data of one period.
+ * @param {Period} period
+ * @returns {Promise<DashboardData>}
+ */
+export async function getDashboard(period) {
+  const data = await loadMock("finbox.mock.json");
   const entry = data?.periods?.[period];
 
   if (!entry) {
@@ -54,3 +59,9 @@ export async function getDashboard(period) {
 
   return entry;
 }
+
+/**
+ * Loads monthly totals and yearly spending by category.
+ * @returns {Promise<ReportsData>}
+ */
+export const getReports = () => loadMock("reports.mock.json");

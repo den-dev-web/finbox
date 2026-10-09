@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getDashboard } from "../../src/js/data/api.js";
+import { getDashboard, getReports } from "../../src/js/data/api.js";
 
 const DATA = { periods: { month: { metrics: { income: 1 } } } };
 
@@ -57,5 +57,17 @@ describe("getDashboard", () => {
     const networkError = new TypeError("Failed to fetch");
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(networkError));
     await expect(run("month")).rejects.toMatchObject({ cause: networkError });
+  });
+
+  it("loads reports from their own file", async () => {
+    const reports = { months: [], categories: [] };
+    mockFetch({ ok: true, json: async () => reports });
+    const result = getReports();
+    result.catch(() => {});
+    await vi.runAllTimersAsync();
+    await expect(result).resolves.toEqual(reports);
+    expect(fetch).toHaveBeenCalledWith(
+      expect.stringMatching(/\/data\/reports\.mock\.json$/),
+    );
   });
 });
