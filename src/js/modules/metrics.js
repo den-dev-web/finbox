@@ -42,10 +42,9 @@ export default function initMetrics() {
   /**
    * @param {HTMLElement} card
    * @param {number} value
-   * @param {string | null} periodLabel not used by the current markup
    * @param {Metrics} metrics
    */
-  const updateCard = (card, value, periodLabel, metrics) => {
+  const updateCard = (card, value, metrics) => {
     const valueEl = card.querySelector("[data-metric-value]");
     const deltaEl = /** @type {HTMLElement | null} */ (
       card.querySelector("[data-metric-delta]")
@@ -111,7 +110,7 @@ export default function initMetrics() {
       const key = /** @type {MetricKey} */ (card.dataset.metric);
       const value = data.metrics?.[key];
       if (typeof value === "number") {
-        updateCard(card, value, null, data.metrics);
+        updateCard(card, value, data.metrics);
       }
     });
   });
