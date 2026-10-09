@@ -43,13 +43,6 @@ Measured on the live demo for all four pages.
 - **Layout stays still (CLS ≤ 0.004, “good” is < 0.1):** skeletons reserve the final size of every widget.
 - **WCAG AA contrast** in both themes: text colors are separate tokens with a verified 4.5:1 ratio.
 
------- | :---------: | :-----------: | :------------: | :-: |
-| Mobile | 98+ | 100 | 100 | 100 |
-| Desktop | 100 | 100 | 100 | 100 |
-
-- **No layout shift (CLS 0):** skeletons reserve the final size of every widget.
-- **WCAG AA contrast** in both themes: text colors are separate tokens with a verified 4.5:1 ratio.
-
 ---
 
 ## ⚙️ Tech Stack
