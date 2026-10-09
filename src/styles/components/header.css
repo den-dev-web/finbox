@@ -92,7 +92,7 @@
   }
 }
 
-@media (width <= 1023px) {
+@media (width < 1024px) {
   .c-header__button--theme {
     display: none;
   }
