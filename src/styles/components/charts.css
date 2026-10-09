@@ -56,13 +56,9 @@ html[data-theme="dark"] .c-chart__svg {
   left: 0.55rem;
   font-size: 0.7rem;
   font-weight: 600;
-  color: rgb(27 30 40 / 55%);
+  color: var(--color-text-muted);
   letter-spacing: 0.04em;
   pointer-events: none;
-}
-
-html[data-theme="dark"] .c-chart__unit {
-  color: rgb(231 235 245 / 55%);
 }
 
 .c-chart__labels {
@@ -70,12 +66,8 @@ html[data-theme="dark"] .c-chart__unit {
   grid-template-columns: repeat(var(--chart-label-count, 4), minmax(0, 1fr));
   gap: 0.35rem;
   font-size: var(--font-size-sm);
-  color: rgb(27 30 40 / 60%);
+  color: var(--color-text-muted);
   text-align: center;
-}
-
-html[data-theme="dark"] .c-chart__labels {
-  color: rgb(231 235 245 / 60%);
 }
 
 .c-chart__labels div {
@@ -88,7 +80,7 @@ html[data-theme="dark"] .c-chart__labels {
   gap: 0.35rem 1rem;
   padding-top: 0.4rem;
   font-size: 0.78rem;
-  color: rgb(27 30 40 / 65%);
+  color: var(--color-text-muted);
 }
 
 .c-chart__stat {
@@ -102,20 +94,12 @@ html[data-theme="dark"] .c-chart__labels {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-size: 0.65rem;
-  color: rgb(27 30 40 / 50%);
+  color: var(--color-text-muted);
 }
 
 .c-chart__stat-value {
   font-weight: 600;
   color: var(--color-text);
-}
-
-html[data-theme="dark"] .c-chart__stats {
-  color: rgb(231 235 245 / 60%);
-}
-
-html[data-theme="dark"] .c-chart__stat-label {
-  color: rgb(231 235 245 / 45%);
 }
 
 .c-chart--doughnut .c-chart__svg {
