@@ -139,6 +139,13 @@ html[data-theme="dark"] .c-chart__svg {
   }
 }
 
+/* Four nowrap axis labels crowd each other in a narrow card */
+@container chart (width < 260px) {
+  .c-chart__labels {
+    font-size: 0.75rem;
+  }
+}
+
 /* Side-by-side doughnut needs 240px + 160px tracks plus the gap */
 @container chart (width >= 420px) {
   .c-chart--doughnut {
