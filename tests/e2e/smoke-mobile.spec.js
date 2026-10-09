@@ -36,3 +36,22 @@ test("transactions render as cards with filters", async ({ page }) => {
   await expect(cards).toHaveCount(1);
   await expect(cards.first()).toContainText("$5,400");
 });
+
+test("dashboard works when storage is blocked", async ({ page }) => {
+  // Some private modes and blocked-cookie settings throw on any storage access
+  await page.addInitScript(() => {
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        throw new DOMException("The operation is insecure.", "SecurityError");
+      },
+    });
+  });
+  await page.goto(PAGES.dashboard);
+  await expect(page.locator('[data-metric="income"]')).toBeVisible();
+  await expect(page.locator("html")).toHaveAttribute(
+    "data-theme",
+    /^(light|dark)$/,
+  );
+  await page.locator("[data-sidebar-toggle]").click();
+  await page.getByRole("button", { name: /^Theme:/ }).click();
+});
