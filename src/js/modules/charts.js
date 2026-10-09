@@ -1,11 +1,11 @@
 import { displayCurrency, formatMoney } from "../utils/format.js";
 
 const CHART_COLORS = [
-  "var(--color-primary)",
-  "var(--color-success)",
-  "var(--color-danger)",
-  "#f5b941",
-  "#7a6ff0",
+  "var(--color-chart-1)",
+  "var(--color-chart-2)",
+  "var(--color-chart-3)",
+  "var(--color-chart-4)",
+  "var(--color-chart-5)",
 ];
 
 /** @typedef {import("../types").DashboardData} DashboardData */

@@ -133,7 +133,7 @@
 
 .c-table__filter-chip.is-active {
   background: var(--color-bg-alt);
-  border-color: rgb(43 109 255 / 40%);
+  border-color: color-mix(in srgb, var(--color-primary) 40%, transparent);
   color: var(--color-primary-text);
   font-weight: 600;
 }

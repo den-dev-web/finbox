@@ -1,18 +1,19 @@
 :root {
-  --color-bg: #f6f7fb;
-  --color-bg-alt: #eef0f6;
-  --color-card: #fff;
-  --color-text: #1b1e28;
-  --color-text-muted: #646875;
-  --color-primary: #2b6dff;
-  --color-primary-text: #2459d6;
-  --color-success: #18a273;
-  --color-danger: #d94b4b;
-  --color-accent: #f5b941;
+  --color-bg: oklch(97.65% 0.0054 274.97deg);
+  --color-bg-alt: oklch(95.53% 0.0083 271.33deg);
+  --color-card: oklch(100% 0 0deg);
+  --color-text: oklch(23.66% 0.0198 271.79deg);
+  --color-text-muted: oklch(51.84% 0.021 272.06deg);
+  --color-primary: oklch(58.32% 0.2275 262.97deg);
+  --color-primary-text: oklch(50.9% 0.2004 263.49deg);
+  --color-success: oklch(63.25% 0.131 163.24deg);
+  --color-danger: oklch(60.9% 0.1782 24.08deg);
+  --color-accent: oklch(82.07% 0.1476 80.87deg);
+  --color-violet: oklch(61.7% 0.1873 283.29deg);
 
   /* Text variants of brand and status colors meet WCAG AA (4.5:1) on cards and badges */
-  --color-success-text: #0e7553;
-  --color-danger-text: #b83737;
+  --color-success-text: oklch(49.97% 0.1027 163.91deg);
+  --color-danger-text: oklch(52.91% 0.1658 24.83deg);
   --font-size-sm: 0.875rem;
   --font-size-md: 1rem;
   --font-size-lg: 1.25rem;
@@ -23,9 +24,16 @@
   --radius-md: 0.875rem;
   --shadow-sm: 0 6px 16px rgb(27 30 40 / 8%);
   --shadow-md: 0 12px 28px rgb(27 30 40 / 14%);
-  --border-color: #d7dbe6;
+  --border-color: oklch(89.16% 0.0156 269.97deg);
   --focus-ring: 0 0 0 3px rgb(43 109 255 / 35%);
   --chart-grid: rgb(27 30 40 / 8%);
+
+  /* Categorical palette for chart series; follows the theme through the brand tokens */
+  --color-chart-1: var(--color-primary);
+  --color-chart-2: var(--color-success);
+  --color-chart-3: var(--color-danger);
+  --color-chart-4: var(--color-accent);
+  --color-chart-5: var(--color-violet);
   --dur-1: 150ms;
   --dur-2: 220ms;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -38,19 +46,19 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
   color-scheme: dark;
 
-  --color-bg: #0f121a;
-  --color-bg-alt: #151926;
-  --color-card: #1b2030;
-  --color-text: #e7ebf5;
-  --color-text-muted: #959cae;
-  --color-primary: #74a2ff;
-  --color-primary-text: #74a2ff;
-  --color-success: #3cc28a;
-  --color-danger: #ff6b6b;
-  --color-success-text: #3cc28a;
-  --color-danger-text: #ff6b6b;
+  --color-bg: oklch(18.3% 0.0172 268.67deg);
+  --color-bg-alt: oklch(21.58% 0.0264 270.89deg);
+  --color-card: oklch(24.64% 0.0315 270.62deg);
+  --color-text: oklch(93.99% 0.0141 268.49deg);
+  --color-text-muted: oklch(69.3% 0.0276 268.73deg);
+  --color-primary: oklch(71.98% 0.1451 263.27deg);
+  --color-primary-text: oklch(71.98% 0.1451 263.27deg);
+  --color-success: oklch(72.81% 0.1417 161.23deg);
+  --color-danger: oklch(71.16% 0.1812 22.84deg);
+  --color-success-text: oklch(72.81% 0.1417 161.23deg);
+  --color-danger-text: oklch(71.16% 0.1812 22.84deg);
   --shadow-sm: 0 6px 16px rgb(10 12 18 / 45%);
   --shadow-md: 0 14px 32px rgb(7 9 14 / 60%);
-  --border-color: #2a3144;
+  --border-color: oklch(31.52% 0.0356 268.68deg);
   --chart-grid: rgb(231 235 245 / 12%);
 }
