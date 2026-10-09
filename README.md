@@ -8,15 +8,24 @@ A financial analytics dashboard built with vanilla JavaScript, modern CSS and no
 
 ---
 
+## 📄 Pages
+
+| Page                                                       | What it does                                                                                                             |
+| :--------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- |
+| [Dashboard](https://den-dev-web.github.io/finbox/)         | Metrics, line and doughnut charts, transactions table with sorting, filters and pagination for day / week / month / year |
+| [Reports](https://den-dev-web.github.io/finbox/reports/)   | Yearly totals, savings rate, grouped bar chart, spending by category, CSV export                                         |
+| [Accounts](https://den-dev-web.github.io/finbox/accounts/) | Balances, search, “Add account” dialog with validation; new accounts persist in the browser                              |
+| [Settings](https://den-dev-web.github.io/finbox/settings/) | Theme (system / light / dark), currency with conversion, default period, table density                                   |
+
 ## ✨ Features
 
-- **Metrics, trends and spending split** for day / week / month / year periods
-- **SVG charts drawn from scratch** — line and doughnut charts without a chart library
-- **Transactions table** with sorting, per-column filters and pagination
-- **Light and dark themes** — follows the OS setting, remembers the user's choice, no flash on load
-- **Loading and error states** for every widget, plus an empty state for the filtered table
-- **Keyboard support** — dropdowns use the listbox pattern (arrows, Home/End, Enter, Escape)
-- **Reduced motion** — animations are skipped when the OS asks for it
+- **SVG charts drawn from scratch** — line, doughnut and grouped bar charts without a chart library
+- **Currency conversion** — USD data shown in USD, EUR or UAH with fixed demo rates; CSV export follows the setting
+- **Themes** — follow the OS live or stay light / dark; applied before first paint, so no flash
+- **Loading, error and empty states** for every widget; skeletons keep the layout still (CLS 0)
+- **Accessible forms and widgets** — labelled fields with inline errors, focus management in the dialog, listbox keyboard pattern, WCAG AA contrast
+- **Page transitions** — cross-document View Transitions where supported, plain navigation elsewhere
+- **Resilient** — works with blocked storage (private modes) and in Safari 15 without `<dialog>` support
 
 Append `?fail=1` to the URL to see the error states.
 
@@ -54,18 +63,30 @@ Measured on the live demo, light and dark themes.
 
 **Design tokens.** Colors, spacing, radii, shadows and motion are CSS custom properties. The dark theme works by redefining tokens under `[data-theme="dark"]`.
 
-**Event-driven modules.** Each widget is an independent module. A small store loads data and broadcasts `data:loaded` / `data:error` events; widgets subscribe and render. Modules never import each other.
+**Multi-page build with shared markup.** Vite builds one HTML page per section with clean URLs. A small plugin in `vite.config.js` inlines shared partials (head, sidebar, header with a title parameter and an actions slot) and marks the current page in the navigation; a missing parameter fails the build.
 
-**Mock API.** `src/js/data/api.js` simulates network latency over a static JSON file, so the UI handles real async states.
+**Event-driven dashboard.** Widgets never import each other. The store is the only owner of the current period: it announces `data:loading`, `data:loaded` and `data:error`; widgets ask for `period:change` or `data:retry`.
+
+**Pure logic, thin views.** Sorting, filtering, pagination, report maths, CSV, validation and currency conversion live in DOM-free modules covered by unit tests; render and controller modules only touch the DOM.
+
+**Settings.** One validated object in `localStorage` (theme, currency, default period, density). An inline head script applies theme and density before first paint; every storage call fails soft.
+
+**Mock API.** `src/js/data/api.js` simulates latency over static JSON files, so the UI handles real async states.
 
 ```
+index.html, reports/, accounts/, settings/   # pages
 src/
+├── partials/      # shared head, sidebar, header
 ├── js/
+│   ├── pages/     # entry point per page (+ main.js for the dashboard)
 │   ├── data/      # mock API
-│   ├── state/     # store and data events
-│   └── modules/   # charts, table, metrics, dropdown, sidebar, theme, reveal
+│   ├── state/     # store, settings
+│   ├── utils/     # money formatting, safe storage
+│   └── modules/   # widgets; */model.js = pure logic, */render.js = DOM
 └── styles/        # ITCSS layers: settings → generic → elements → objects → components → utilities
-public/data/       # mock dataset
+public/data/       # mock datasets
+tests/unit/        # Vitest
+tests/e2e/         # Playwright: smoke, accessibility, HTML, layout, visual
 ```
 
 ---
@@ -82,9 +103,9 @@ npm run preview    # serve the production build
 npm run lint       # ESLint + Stylelint + Prettier check
 npm run typecheck  # TypeScript strict check of JSDoc types
 npm run format     # auto-fix formatting
-npm run test:unit  # unit tests for table, chart and API logic
-npm run test:e2e   # smoke, accessibility and HTML tests
-npm run test:visual # screenshot comparison: 3 browsers × 3 widths × 2 themes
+npm run test:unit  # unit tests for the pure logic modules
+npm run test:e2e   # smoke, accessibility, HTML and no-horizontal-scroll tests
+npm run test:visual # screenshots of every page: 3 browsers × 3 widths × 2 themes
 ```
 
 Tests run in the official Playwright container (Podman locally, GitHub Actions in CI), so screenshots are pixel-identical everywhere. Every pull request runs lint, build and all tests; a push to `main` deploys to GitHub Pages only when they pass.
