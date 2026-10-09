@@ -2,14 +2,11 @@
 const BEM_CLASS_PATTERN =
   "^(c|o|u|is|has)-[a-z0-9]+(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$";
 
-// No Autoprefixer: hand-written -webkit- forms required for Safari/iOS >= 15 (matched with the prefix)
+// No Autoprefixer: hand-written -webkit- forms required for Safari/iOS >= 16.4 (matched with the prefix)
 const MANUAL_PREFIX_PROPERTIES = [
   "-webkit-backdrop-filter",
   "-webkit-user-select",
   "-webkit-hyphens",
-  "-webkit-appearance",
-  "-webkit-mask",
-  "-webkit-mask-image",
   "-webkit-text-size-adjust",
 ];
 
