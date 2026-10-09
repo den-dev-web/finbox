@@ -10,10 +10,11 @@
 /** @type {FilterField[]} */
 export const FILTER_FIELDS = ["date", "category", "description", "amount"];
 
+// Statement style: always show cents so the amount column lines up
 export const formatCurrency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
-  minimumFractionDigits: 0,
+  minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
 

@@ -41,10 +41,20 @@ test("table sorts by amount", async ({ page }) => {
   const header = page.locator("th", { has: sortButton });
   await sortButton.click();
   await expect(header).toHaveAttribute("aria-sort", "descending");
-  expect(await amounts(page)).toEqual(["$5,400", "-$210", "-$320", "-$680"]);
+  expect(await amounts(page)).toEqual([
+    "$5,400.00",
+    "-$210.00",
+    "-$320.00",
+    "-$680.00",
+  ]);
   await sortButton.click();
   await expect(header).toHaveAttribute("aria-sort", "ascending");
-  expect(await amounts(page)).toEqual(["-$680", "-$320", "-$210", "$5,400"]);
+  expect(await amounts(page)).toEqual([
+    "-$680.00",
+    "-$320.00",
+    "-$210.00",
+    "$5,400.00",
+  ]);
 });
 
 test("table filters by category and resets", async ({ page }) => {

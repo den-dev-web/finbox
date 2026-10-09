@@ -34,7 +34,7 @@ test("transactions render as cards with filters", async ({ page }) => {
     .locator('[data-filter-option="category"][data-filter-value="Salary"]')
     .click();
   await expect(cards).toHaveCount(1);
-  await expect(cards.first()).toContainText("$5,400");
+  await expect(cards.first()).toContainText("$5,400.00");
 });
 
 test("dashboard works when storage is blocked", async ({ page }) => {

@@ -34,7 +34,7 @@ const ROWS = [
     date: "2026-04-05",
     category: "Travel",
     description: "Hotel",
-    amount: -320,
+    amount: -320.5,
   },
 ];
 
@@ -49,10 +49,10 @@ const amounts = (rows) => rows.map((row) => row.amount);
 describe("applySort", () => {
   it("sorts by amount in both directions", () => {
     expect(amounts(applySort(ROWS, "amount", "asc"))).toEqual([
-      -680, -320, -210, 5400,
+      -680, -320.5, -210, 5400,
     ]);
     expect(amounts(applySort(ROWS, "amount", "desc"))).toEqual([
-      5400, -210, -320, -680,
+      5400, -210, -320.5, -680,
     ]);
   });
 
@@ -94,7 +94,8 @@ describe("nextSort", () => {
 
 describe("normalizeValue", () => {
   it("formats values the way the table displays them", () => {
-    expect(normalizeValue("amount", ROWS[3])).toBe("-$320");
+    expect(normalizeValue("amount", ROWS[3])).toBe("-$320.50");
+    expect(normalizeValue("amount", ROWS[1])).toBe("$5,400.00");
     expect(normalizeValue("category", ROWS[0])).toBe("Travel");
     expect(normalizeValue("missing", ROWS[0])).toBe("");
   });
@@ -111,7 +112,7 @@ describe("filters", () => {
   });
 
   it("combines active filters with AND", () => {
-    const filters = { ...NO_FILTERS, category: "Travel", amount: "-$680" };
+    const filters = { ...NO_FILTERS, category: "Travel", amount: "-$680.00" };
     expect(isFiltering(filters)).toBe(true);
     expect(applyFilters(ROWS, filters)).toEqual([ROWS[0]]);
   });
