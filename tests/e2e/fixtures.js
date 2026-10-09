@@ -9,13 +9,13 @@ const HTTP_ERROR_MIN = 400;
 export const test = base.extend({
   page: async ({ page }, use) => {
     const errors = [];
-    page.on("pageerror", (error) => errors.push(error.message));
+    page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
     page.on("console", (message) => {
       if (
         message.type() === "error" &&
         !message.text().startsWith(RESOURCE_ERROR_PREFIX)
       ) {
-        errors.push(message.text());
+        errors.push(`console: ${message.text()}`);
       }
     });
     page.on("response", (response) => {

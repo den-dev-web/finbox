@@ -23,4 +23,9 @@ export default [
     files: ["*.config.js"],
     languageOptions: { globals: globals.node },
   },
+  // Tests run in Node and Playwright, not in the visitors' browsers
+  {
+    files: ["tests/**"],
+    rules: { "compat/compat": "off" },
+  },
 ];
