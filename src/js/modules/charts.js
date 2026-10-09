@@ -12,12 +12,29 @@ const formatCurrency = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+/** @typedef {import("../types").DashboardData} DashboardData */
+/** @typedef {{ avg: number, min: number, max: number, change: number | null }} LineStats */
+/** @typedef {{ label: string, value: number, color: string }} LegendItem */
+
+/**
+ * @template {keyof SVGElementTagNameMap} K
+ * @param {K} name
+ * @returns {SVGElementTagNameMap[K]}
+ */
 const createSvgElement = (name) =>
-  document.createElementNS("http://www.w3.org/2000/svg", name);
+  /** @type {SVGElementTagNameMap[K]} */ (
+    document.createElementNS("http://www.w3.org/2000/svg", name)
+  );
 
 const prefersReducedMotion = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+/**
+ * Draws a stroke by animating its dash offset (skipped for reduced motion).
+ * @param {SVGElement} element
+ * @param {string} from
+ * @param {string} to
+ */
 const animateStroke = (element, from, to) => {
   if (prefersReducedMotion()) {
     element.style.strokeDashoffset = to;
@@ -29,6 +46,13 @@ const animateStroke = (element, from, to) => {
   });
 };
 
+/**
+ * @param {SVGSVGElement} svg
+ * @param {string[]} labels
+ * @param {number[]} values
+ * @param {string} variant series key; "expense" switches the line color
+ * @returns {string[]} labels for the x axis
+ */
 const buildLineChart = (svg, labels, values, variant) => {
   const width = 320;
   const height = 220;
@@ -93,6 +117,10 @@ const buildLineChart = (svg, labels, values, variant) => {
   return labels;
 };
 
+/**
+ * @param {number[] | undefined} values
+ * @returns {LineStats | null}
+ */
 export const computeLineStats = (values) => {
   if (!Array.isArray(values) || values.length === 0) {
     return null;
@@ -113,6 +141,10 @@ export const computeLineStats = (values) => {
   };
 };
 
+/**
+ * @param {HTMLElement | null} container
+ * @param {LineStats | null} stats
+ */
 const renderStats = (container, stats) => {
   if (!container || !stats) {
     return;
@@ -142,6 +174,12 @@ const renderStats = (container, stats) => {
   `;
 };
 
+/**
+ * @param {SVGSVGElement} svg
+ * @param {string[]} labels
+ * @param {number[]} values
+ * @returns {LegendItem[]}
+ */
 const buildDoughnutChart = (svg, labels, values) => {
   const size = 220;
   const radius = 78;
@@ -188,12 +226,16 @@ const buildDoughnutChart = (svg, labels, values) => {
   }));
 };
 
+/**
+ * @param {HTMLElement | null} container
+ * @param {string[]} labels
+ */
 const renderLabels = (container, labels) => {
   if (!container) {
     return;
   }
   container.innerHTML = "";
-  container.style.setProperty("--chart-label-count", labels.length);
+  container.style.setProperty("--chart-label-count", String(labels.length));
   labels.forEach((label) => {
     const item = document.createElement("div");
     item.textContent = label;
@@ -201,6 +243,10 @@ const renderLabels = (container, labels) => {
   });
 };
 
+/**
+ * @param {HTMLElement | null} container
+ * @param {LegendItem[]} items
+ */
 const renderLegend = (container, items) => {
   if (!container) {
     return;
@@ -228,11 +274,14 @@ const renderLegend = (container, items) => {
 };
 
 export default function initCharts() {
-  const chartCards = [...document.querySelectorAll("[data-chart-card]")];
+  const chartCards = /** @type {HTMLElement[]} */ ([
+    ...document.querySelectorAll("[data-chart-card]"),
+  ]);
   if (chartCards.length === 0) {
     return;
   }
 
+  /** @type {{ data: DashboardData | null }} */
   const state = {
     data: null,
   };
@@ -243,18 +292,35 @@ export default function initCharts() {
     });
   };
 
+  /**
+   * @param {HTMLElement} card
+   * @param {DashboardData} data
+   */
   const renderChartCard = (card, data) => {
-    const chart = card.querySelector("[data-chart]");
-    const svg = card.querySelector(".c-chart__svg");
-    const labelsContainer = card.querySelector("[data-chart-labels]");
-    const legendContainer = card.querySelector("[data-chart-legend]");
-    const statsContainer = card.querySelector("[data-chart-stats]");
+    const chart = /** @type {HTMLElement | null} */ (
+      card.querySelector("[data-chart]")
+    );
+    const svg = /** @type {SVGSVGElement | null} */ (
+      card.querySelector(".c-chart__svg")
+    );
+    const labelsContainer = /** @type {HTMLElement | null} */ (
+      card.querySelector("[data-chart-labels]")
+    );
+    const legendContainer = /** @type {HTMLElement | null} */ (
+      card.querySelector("[data-chart-legend]")
+    );
+    const statsContainer = /** @type {HTMLElement | null} */ (
+      card.querySelector("[data-chart-stats]")
+    );
 
     if (!chart || !svg) {
       return;
     }
 
     const seriesKey = chart.dataset.series;
+    if (!seriesKey) {
+      return;
+    }
     const chartType = chart.dataset.chart;
     const series = data.charts?.[seriesKey];
 
@@ -316,7 +382,7 @@ export default function initCharts() {
         if (!entry.isIntersecting) {
           return;
         }
-        const card = entry.target;
+        const card = /** @type {HTMLElement} */ (entry.target);
         card.dataset.visible = "true";
         observer.unobserve(card);
         if (state.data) {

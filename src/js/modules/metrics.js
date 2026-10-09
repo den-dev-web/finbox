@@ -8,6 +8,14 @@ const formatNumber = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 
+/** @typedef {import("../types").Metrics} Metrics */
+/** @typedef {import("../types").MetricKey} MetricKey */
+/** @typedef {import("../types").Period} Period */
+
+/**
+ * Formats a percentage change with a direction arrow, e.g. "▲ 8.4%".
+ * @param {number | undefined} value
+ */
 export const formatDelta = (value) => {
   if (typeof value !== "number") {
     return "—";
@@ -20,16 +28,28 @@ export const formatDelta = (value) => {
 };
 
 export default function initMetrics() {
-  const cards = [...document.querySelectorAll("[data-metric]")];
+  const cards = /** @type {HTMLElement[]} */ ([
+    ...document.querySelectorAll("[data-metric]"),
+  ]);
   if (cards.length === 0) {
     return;
   }
 
+  // Period of the last request, reloaded by the Retry button
+  /** @type {{ period: Period }} */
   const state = { period: "month" };
 
+  /**
+   * @param {HTMLElement} card
+   * @param {number} value
+   * @param {string | null} periodLabel not used by the current markup
+   * @param {Metrics} metrics
+   */
   const updateCard = (card, value, periodLabel, metrics) => {
     const valueEl = card.querySelector("[data-metric-value]");
-    const deltaEl = card.querySelector("[data-metric-delta]");
+    const deltaEl = /** @type {HTMLElement | null} */ (
+      card.querySelector("[data-metric-delta]")
+    );
     const format = card.dataset.metricFormat ?? "currency";
 
     if (valueEl) {
@@ -39,7 +59,8 @@ export default function initMetrics() {
           : formatCurrency.format(value);
     }
     if (deltaEl) {
-      const deltaValue = metrics?.deltas?.[card.dataset.metric];
+      const key = /** @type {MetricKey} */ (card.dataset.metric);
+      const deltaValue = metrics?.deltas?.[key];
       deltaEl.textContent = formatDelta(deltaValue);
       if (typeof deltaValue === "number") {
         deltaEl.dataset.deltaState = deltaValue < 0 ? "negative" : "positive";
@@ -50,6 +71,7 @@ export default function initMetrics() {
     card.dataset.state = "default";
   };
 
+  /** @param {HTMLElement} card */
   const showError = (card) => {
     card.dataset.state = "error";
   };
@@ -86,7 +108,7 @@ export default function initMetrics() {
       return;
     }
     cards.forEach((card) => {
-      const key = card.dataset.metric;
+      const key = /** @type {MetricKey} */ (card.dataset.metric);
       const value = data.metrics?.[key];
       if (typeof value === "number") {
         updateCard(card, value, null, data.metrics);
