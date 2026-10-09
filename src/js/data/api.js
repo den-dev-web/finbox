@@ -10,6 +10,14 @@ const sleep = (minMs = 300, maxMs = 800) =>
 const shouldFail = () =>
   new URLSearchParams(window.location.search).get("fail") === "1";
 
+/** @typedef {import("../types").Period} Period */
+/** @typedef {import("../types").DashboardData} DashboardData */
+
+/**
+ * Loads the dashboard data of one period from the mock JSON file.
+ * @param {Period} period
+ * @returns {Promise<DashboardData>}
+ */
 export async function getDashboard(period) {
   await sleep();
 
