@@ -16,26 +16,31 @@ The project demonstrates how a **data-driven interface** can be built with a str
 ## ⚙️ Tech Stack
 
 ### Core
+
 - **HTML5** — semantic markup
 - **CSS3** — modern layout techniques and component styling
 - **JavaScript (ES6+)** — application logic and interactivity
 
 ### Tooling
+
 - **Vite** — development server and build tool
 - **npm** — dependency management
 - **PostCSS / Autoprefixer** — cross-browser CSS support
 - **ESLint / Prettier** — code quality and formatting
 
 ### Styling Architecture
+
 - **ITCSS** — layered CSS architecture
 - **BEM** — component naming and isolation
 - **CSS Custom Properties** — design tokens and theming
 
 ### Assets & Resources
+
 - Custom fonts and icon assets
 - Static mock data for charts and metrics
 
 ### Testing
+
 - Manual UI and interaction testing
 
 ---
@@ -91,3 +96,4 @@ The project can be run locally using the development server:
 ```bash
 npm install
 npm run dev
+```

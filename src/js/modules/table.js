@@ -82,8 +82,7 @@ export default function initTable() {
     const margin = 8;
     const overflowIfLeft =
       triggerRect.left + menuRect.width + margin > viewportWidth;
-    const overflowIfRight =
-      triggerRect.right - menuRect.width - margin < 0;
+    const overflowIfRight = triggerRect.right - menuRect.width - margin < 0;
     let alignRight = preferRight;
 
     if (alignRight && overflowIfRight && !overflowIfLeft) {
@@ -107,26 +106,26 @@ export default function initTable() {
     return row[field] ?? "";
   };
 
-  const isFiltering = () =>
-    Object.values(state.filters).some((value) => value);
+  const isFiltering = () => Object.values(state.filters).some((value) => value);
 
   const applyFilters = (rows) => {
     const activeFields = Object.entries(state.filters).filter(
-      ([, value]) => value
+      ([, value]) => value,
     );
     if (activeFields.length === 0) {
       return rows;
     }
     return rows.filter((row) =>
-      activeFields.every(([field, value]) => normalizeValue(field, row) === value)
+      activeFields.every(
+        ([field, value]) => normalizeValue(field, row) === value,
+      ),
     );
   };
 
   const getPageCount = (rows) =>
     Math.max(1, Math.ceil(rows.length / state.pageSize));
 
-  const clampPage = (page, pageCount) =>
-    Math.min(Math.max(page, 1), pageCount);
+  const clampPage = (page, pageCount) => Math.min(Math.max(page, 1), pageCount);
 
   const renderFilters = (rows) => {
     if (!filtersContainer) {
@@ -266,7 +265,7 @@ export default function initTable() {
       if (key === state.sortKey) {
         button.setAttribute(
           "aria-sort",
-          state.sortDirection === "asc" ? "ascending" : "descending"
+          state.sortDirection === "asc" ? "ascending" : "descending",
         );
         const indicator = button.querySelector(".c-table__sort-indicator");
         if (indicator) {
@@ -539,7 +538,7 @@ export default function initTable() {
         return;
       }
       const menu = filtersContainer.querySelector(
-        `[data-filter-menu="${field}"]`
+        `[data-filter-menu="${field}"]`,
       );
       if (!menu) {
         return;
@@ -686,7 +685,7 @@ export default function initTable() {
   if (retryButton) {
     retryButton.addEventListener("click", () => {
       document.dispatchEvent(
-        new CustomEvent("period:change", { detail: { period: state.period } })
+        new CustomEvent("period:change", { detail: { period: state.period } }),
       );
     });
   }

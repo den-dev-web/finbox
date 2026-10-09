@@ -25,7 +25,8 @@
   border-radius: 0.75rem;
   padding: 0.5rem 0.75rem;
   cursor: pointer;
-  transition: border-color var(--dur-1) var(--ease-out),
+  transition:
+    border-color var(--dur-1) var(--ease-out),
     box-shadow var(--dur-1) var(--ease-out);
 }
 

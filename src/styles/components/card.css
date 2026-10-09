@@ -8,7 +8,8 @@
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-sm);
   min-height: 180px;
-  transition: transform var(--dur-2) var(--ease-out),
+  transition:
+    transform var(--dur-2) var(--ease-out),
     box-shadow var(--dur-2) var(--ease-out);
 }
 

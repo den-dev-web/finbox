@@ -15,8 +15,7 @@ export default function initDropdowns() {
     const margin = 8;
     const overflowIfLeft =
       triggerRect.left + panelRect.width + margin > viewportWidth;
-    const overflowIfRight =
-      triggerRect.right - panelRect.width - margin < 0;
+    const overflowIfRight = triggerRect.right - panelRect.width - margin < 0;
     let alignRight = false;
 
     if (overflowIfLeft && !overflowIfRight) {
@@ -62,7 +61,9 @@ export default function initDropdowns() {
     const selectedIndex = () =>
       Math.max(
         0,
-        options.findIndex((option) => option.getAttribute("aria-selected") === "true")
+        options.findIndex(
+          (option) => option.getAttribute("aria-selected") === "true",
+        ),
       );
 
     trigger.addEventListener("click", () => {
@@ -92,7 +93,7 @@ export default function initDropdowns() {
     panel.addEventListener("keydown", (event) => {
       const currentIndex = Math.max(
         0,
-        options.findIndex((option) => option.tabIndex === 0)
+        options.findIndex((option) => option.tabIndex === 0),
       );
 
       if (event.key === "Escape") {
@@ -145,7 +146,7 @@ export default function initDropdowns() {
 
         if (period) {
           document.dispatchEvent(
-            new CustomEvent("period:change", { detail: { period } })
+            new CustomEvent("period:change", { detail: { period } }),
           );
         }
       });

@@ -22,7 +22,7 @@ export default function initReveal() {
         observer.unobserve(entry.target);
       });
     },
-    { rootMargin: "80px 0px" }
+    { rootMargin: "80px 0px" },
   );
 
   items.forEach((item) => observer.observe(item));

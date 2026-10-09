@@ -18,11 +18,7 @@
 }
 
 html[data-theme="dark"] .c-chart__svg {
-  background: linear-gradient(
-    180deg,
-    rgb(15 18 26 / 60%),
-    rgb(15 18 26 / 0%)
-  );
+  background: linear-gradient(180deg, rgb(15 18 26 / 60%), rgb(15 18 26 / 0%));
 }
 
 .c-chart__grid {

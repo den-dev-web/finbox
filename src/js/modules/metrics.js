@@ -65,7 +65,9 @@ export default function initMetrics() {
     if (retryButton) {
       retryButton.addEventListener("click", () => {
         document.dispatchEvent(
-          new CustomEvent("period:change", { detail: { period: state.period } })
+          new CustomEvent("period:change", {
+            detail: { period: state.period },
+          }),
         );
       });
     }

@@ -7,13 +7,13 @@ const state = {
 
 const notifyLoaded = (period, data) => {
   document.dispatchEvent(
-    new CustomEvent("data:loaded", { detail: { period, data } })
+    new CustomEvent("data:loaded", { detail: { period, data } }),
   );
 };
 
 const notifyError = (period, error) => {
   document.dispatchEvent(
-    new CustomEvent("data:error", { detail: { period, error } })
+    new CustomEvent("data:error", { detail: { period, error } }),
   );
 };
 

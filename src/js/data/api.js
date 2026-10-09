@@ -19,13 +19,18 @@ export async function getDashboard(period) {
   try {
     response = await fetch(DATA_URL);
   } catch (error) {
-    throw new Error("Failed to fetch mock data. Check public/data/finbox.mock.json.", {
-      cause: error,
-    });
+    throw new Error(
+      "Failed to fetch mock data. Check public/data/finbox.mock.json.",
+      {
+        cause: error,
+      },
+    );
   }
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error("Mock data file not found. Check public/data/finbox.mock.json.");
+      throw new Error(
+        "Mock data file not found. Check public/data/finbox.mock.json.",
+      );
     }
     throw new Error("Failed to load mock data");
   }

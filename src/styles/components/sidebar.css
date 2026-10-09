@@ -38,7 +38,8 @@
   border-radius: 0.75rem;
   color: inherit;
   text-decoration: none;
-  transition: background-color var(--dur-1) var(--ease-out),
+  transition:
+    background-color var(--dur-1) var(--ease-out),
     color var(--dur-1) var(--ease-out);
 }
 

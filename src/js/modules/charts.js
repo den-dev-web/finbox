@@ -64,7 +64,12 @@ const buildLineChart = (svg, labels, values, variant) => {
     .map((point, index) => `${index === 0 ? "M" : "L"}${point.x},${point.y}`)
     .join(" ");
   path.setAttribute("d", d);
-  path.setAttribute("class", variant === "expense" ? "c-chart__line c-chart__line--expense" : "c-chart__line");
+  path.setAttribute(
+    "class",
+    variant === "expense"
+      ? "c-chart__line c-chart__line--expense"
+      : "c-chart__line",
+  );
   svg.appendChild(path);
 
   const length = path.getTotalLength();
@@ -78,7 +83,9 @@ const buildLineChart = (svg, labels, values, variant) => {
     dot.setAttribute("r", "3.5");
     dot.setAttribute(
       "class",
-      variant === "expense" ? "c-chart__dot c-chart__dot--expense" : "c-chart__dot"
+      variant === "expense"
+        ? "c-chart__dot c-chart__dot--expense"
+        : "c-chart__dot",
     );
     svg.appendChild(dot);
   });
@@ -96,8 +103,7 @@ const computeLineStats = (values) => {
   const max = Math.max(...values);
   const first = values[0];
   const last = values[values.length - 1];
-  const change =
-    first === 0 ? null : ((last - first) / Math.abs(first)) * 100;
+  const change = first === 0 ? null : ((last - first) / Math.abs(first)) * 100;
 
   return {
     avg,
@@ -156,7 +162,10 @@ const buildDoughnutChart = (svg, labels, values) => {
     slice.setAttribute("fill", "transparent");
     slice.setAttribute("stroke", CHART_COLORS[index % CHART_COLORS.length]);
     slice.setAttribute("stroke-width", "18");
-    slice.setAttribute("stroke-dasharray", `${length} ${circumference - length}`);
+    slice.setAttribute(
+      "stroke-dasharray",
+      `${length} ${circumference - length}`,
+    );
     slice.setAttribute("stroke-dashoffset", (-offset).toString());
     slice.setAttribute("stroke-linecap", "round");
     slice.setAttribute("class", "c-chart__slice");
@@ -235,11 +244,11 @@ export default function initCharts() {
   };
 
   const renderChartCard = (card, data) => {
-  const chart = card.querySelector("[data-chart]");
-  const svg = card.querySelector(".c-chart__svg");
-  const labelsContainer = card.querySelector("[data-chart-labels]");
-  const legendContainer = card.querySelector("[data-chart-legend]");
-  const statsContainer = card.querySelector("[data-chart-stats]");
+    const chart = card.querySelector("[data-chart]");
+    const svg = card.querySelector(".c-chart__svg");
+    const labelsContainer = card.querySelector("[data-chart-labels]");
+    const legendContainer = card.querySelector("[data-chart-legend]");
+    const statsContainer = card.querySelector("[data-chart-stats]");
 
     if (!chart || !svg) {
       return;
@@ -258,7 +267,7 @@ export default function initCharts() {
         svg,
         series.labels || [],
         series.values,
-        seriesKey
+        seriesKey,
       );
       renderLabels(labelsContainer, labels);
       renderStats(statsContainer, computeLineStats(series.values));
@@ -266,7 +275,7 @@ export default function initCharts() {
       const legendItems = buildDoughnutChart(
         svg,
         series.labels || [],
-        series.values
+        series.values,
       );
       renderLegend(legendContainer, legendItems);
     }
@@ -315,7 +324,7 @@ export default function initCharts() {
         }
       });
     },
-    { rootMargin: "120px 0px" }
+    { rootMargin: "120px 0px" },
   );
 
   chartCards.forEach((card) => {
