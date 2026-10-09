@@ -55,3 +55,18 @@ test("dashboard works when storage is blocked", async ({ page }) => {
   await page.locator("[data-sidebar-toggle]").click();
   await page.getByRole("button", { name: /^Theme:/ }).click();
 });
+
+test("account form works without native dialog support", async ({ page }) => {
+  // Safari 15.0–15.3 have no HTMLDialogElement.showModal
+  await page.addInitScript(() => {
+    delete HTMLDialogElement.prototype.showModal;
+  });
+  await page.goto(PAGES.accounts);
+  await page.getByRole("button", { name: "Add account" }).click();
+  const name = page.getByLabel("Name");
+  await expect(name).toBeVisible();
+  await expect(name).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(name).toBeHidden();
+  await expect(page.getByRole("button", { name: "Add account" })).toBeFocused();
+});

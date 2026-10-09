@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <!-- @include head-common -->
+    <title>FinBox — Accounts</title>
+    <meta
+      name="description"
+      content="FinBox accounts: balances across bank accounts, cards, savings and investments."
+    />
+    <link
+      rel="canonical"
+      href="https://den-dev-web.github.io/finbox/accounts/"
+    />
+    <meta property="og:title" content="FinBox — Accounts" />
+    <meta
+      property="og:description"
+      content="FinBox accounts: balances across bank accounts, cards, savings and investments."
+    />
+    <meta
+      property="og:url"
+      content="https://den-dev-web.github.io/finbox/accounts/"
+    />
+  </head>
+  <body>
+    <div class="o-shell">
+      <!-- @include sidebar -->
+
+      <div
+        class="c-sidebar__overlay"
+        aria-hidden="true"
+        data-sidebar-overlay
+      ></div>
+
+      <div class="o-content">
+        <!-- @block header title="Accounts" -->
+        <button class="c-header__button" type="button" data-account-add>
+          Add account
+        </button>
+        <!-- @endblock -->
+
+        <main class="o-main">
+          <div class="o-container">
+            <div class="o-dashboard-grid">
+              <section
+                class="c-card c-metric c-metric--balance o-dashboard-grid__span-4 u-reveal"
+                data-state="loading"
+                data-accounts-card
+              >
+                <div class="c-card__header">
+                  <div class="c-metric__title">
+                    <span class="c-metric__indicator" aria-hidden="true"></span>
+                    <h2 class="c-card__title">Total balance</h2>
+                  </div>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <p class="c-metric__value" data-account-total>—</p>
+                    <p class="c-metric__summary" data-account-summary>&nbsp;</p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">Failed to load data.</div>
+                </div>
+              </section>
+
+              <section
+                class="c-card o-dashboard-grid__span-4 u-reveal"
+                data-state="loading"
+                data-accounts-card
+              >
+                <div class="c-card__header">
+                  <h2 class="c-card__title">Your accounts</h2>
+                </div>
+                <div class="c-card__body">
+                  <div class="c-card__content">
+                    <div class="c-accounts__toolbar">
+                      <div class="c-field">
+                        <label class="c-field__label" for="account-search"
+                          >Search accounts</label
+                        >
+                        <input
+                          class="c-field__input"
+                          id="account-search"
+                          type="search"
+                          autocomplete="off"
+                          placeholder="Name, bank or type"
+                          data-account-search
+                        />
+                      </div>
+                      <p
+                        class="c-accounts__count"
+                        aria-live="polite"
+                        data-account-count
+                      ></p>
+                    </div>
+                    <!-- Placeholders reserve the list height until data renders -->
+                    <ul class="c-account-list" data-account-list>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                      <li class="c-account">
+                        <div class="c-account__header">
+                          <h3 class="c-account__name">&nbsp;</h3>
+                          <span class="c-account__type">&nbsp;</span>
+                        </div>
+                        <p class="c-account__institution">&nbsp;</p>
+                        <p class="c-account__balance">&nbsp;</p>
+                      </li>
+                    </ul>
+                    <p class="c-account-list__empty" data-account-empty hidden>
+                      No accounts match your search.
+                    </p>
+                  </div>
+                  <div class="c-skeleton" aria-hidden="true"></div>
+                  <div class="c-card__error">
+                    Failed to load data.
+                    <button
+                      class="c-metric__retry"
+                      type="button"
+                      data-account-retry
+                    >
+                      Retry
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </main>
+        <footer class="o-footer">
+          <div class="o-container">
+            <small>FinBox © 2026</small>
+          </div>
+        </footer>
+      </div>
+      <dialog
+        class="c-dialog"
+        aria-labelledby="account-dialog-title"
+        data-account-dialog
+      >
+        <form class="c-dialog__form" novalidate data-account-form>
+          <h2 class="c-dialog__title" id="account-dialog-title">Add account</h2>
+          <div class="c-field">
+            <label class="c-field__label" for="account-name">Name</label>
+            <input
+              class="c-field__input"
+              id="account-name"
+              name="name"
+              autocomplete="off"
+              aria-describedby="account-name-error"
+            />
+            <p class="c-field__error" id="account-name-error" hidden></p>
+          </div>
+          <div class="c-field">
+            <label class="c-field__label" for="account-type">Type</label>
+            <select
+              class="c-field__input"
+              id="account-type"
+              name="type"
+              aria-describedby="account-type-error"
+            >
+              <option value="">Choose a type</option>
+              <option value="bank">Bank account</option>
+              <option value="savings">Savings</option>
+              <option value="card">Credit card</option>
+              <option value="investment">Investment</option>
+              <option value="cash">Cash</option>
+            </select>
+            <p class="c-field__error" id="account-type-error" hidden></p>
+          </div>
+          <div class="c-field">
+            <label class="c-field__label" for="account-institution"
+              >Bank or broker (optional)</label
+            >
+            <input
+              class="c-field__input"
+              id="account-institution"
+              name="institution"
+              autocomplete="off"
+              aria-describedby="account-institution-error"
+            />
+            <p class="c-field__error" id="account-institution-error" hidden></p>
+          </div>
+          <div class="c-field">
+            <label class="c-field__label" for="account-balance"
+              >Balance (<span data-account-currency>USD</span>)</label
+            >
+            <input
+              class="c-field__input"
+              id="account-balance"
+              name="balance"
+              inputmode="decimal"
+              autocomplete="off"
+              aria-describedby="account-balance-hint account-balance-error"
+            />
+            <p class="c-field__hint" id="account-balance-hint">
+              Use a minus sign for card debt, e.g. -250.
+            </p>
+            <p class="c-field__error" id="account-balance-error" hidden></p>
+          </div>
+          <div class="c-dialog__actions">
+            <button class="c-header__button" type="button" data-account-cancel>
+              Cancel
+            </button>
+            <button class="c-dialog__submit" type="submit">Add account</button>
+          </div>
+        </form>
+      </dialog>
+    </div>
+    <script type="module" src="/src/js/pages/accounts.js"></script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+.c-accounts__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.c-accounts__toolbar .c-field {
+  flex: 1 1 260px;
+  max-width: 360px;
+}
+
+.c-accounts__count {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.c-account-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: var(--space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.c-account {
+  display: grid;
+  gap: 0.35rem;
+  padding: var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: calc(var(--radius-md) - 2px);
+  background-color: var(--color-bg-alt);
+}
+
+.c-account__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.c-account__name {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.c-account__type {
+  flex-shrink: 0;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.c-account__institution {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.c-account__balance {
+  margin: 0.4rem 0 0;
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.c-account__balance--negative {
+  color: var(--color-danger-text);
+}
+
+.c-account-list__empty {
+  margin: 0;
+  padding: var(--space-lg) 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}

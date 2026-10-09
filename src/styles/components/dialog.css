@@ -1,0 +1,59 @@
+/*
+ * Native <dialog>. Closed and open states are explicit so the same styles work
+ * in browsers without <dialog> support (Safari 15.0–15.3), where JS toggles [open].
+ */
+.c-dialog:not([open]) {
+  display: none;
+}
+
+.c-dialog[open] {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: block;
+  width: min(100% - 2rem, 28rem);
+  height: fit-content;
+  max-height: calc(100% - 2rem);
+  margin: auto;
+  padding: var(--space-lg);
+  overflow-y: auto;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--color-card);
+  color: var(--color-text);
+  box-shadow: var(--shadow-md);
+}
+
+.c-dialog::backdrop {
+  background-color: rgb(15 18 26 / 55%);
+}
+
+.c-dialog__form {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.c-dialog__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+
+.c-dialog__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
+.c-dialog__submit {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: var(--color-primary-text);
+  color: var(--color-card);
+  font-weight: 600;
+}
+
+.c-dialog__submit:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}

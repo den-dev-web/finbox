@@ -8,6 +8,7 @@ const root = (path) => fileURLToPath(new URL(path, import.meta.url));
 const PAGES = {
   dashboard: "index.html",
   reports: "reports/index.html",
+  accounts: "accounts/index.html",
 };
 
 const INCLUDE_PATTERN = /<!-- @include ([\w-]+) -->/g;
